@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 
 // Instrument artwork from Musio's asset CDN for the Netflix-style grid
-// Reduced to 42 images (6 rows x 7 columns) for faster loading - most are hidden behind gradient anyway
 const instrumentImages = [
   "https://assets.mus.io/ff2b6e950ff58c595a2d9291805cf3ac29ab1200ba84ee545a09b5fa8584ff6e.png",
   "https://assets.mus.io/0c16c49a0c870ab6e7ecfd338b2fd718d9e897c59aa261f9460c8879eb8c7584.png",
@@ -46,6 +45,62 @@ const instrumentImages = [
   "https://assets.mus.io/da52f37f37b01530ba11fc35abf4ccc8d57994340f572295c702b2ca60be5802.png",
   "https://assets.mus.io/a1edecd3b1527a134a5fea666d68d7b0aed112fc56237a0278893a252ea6a71b.png",
   "https://assets.mus.io/08ee708999aacf7bc421de18282a8f7ed745f0daf0c1f1790ce9126ffcbc0936.png",
+  "https://assets.mus.io/26972cac458fd6d676d5dcddd71582695cfa0dc446e3c3dc370f255393f7faa7.png",
+  "https://assets.mus.io/7e72ac36e2afa1bc33259eeed45aa496a7040079b0c7f510a4ec9d62ef3d38d0.png",
+  "https://assets.mus.io/bfb3deeb76562e7d1f621047229c4124b09b1173ca34184c5da07237d9ee7858.png",
+  "https://assets.mus.io/21191d2771156504d857619c9fafd70ca5191dc84760794d8cc99af986f79ff2.png",
+  "https://assets.mus.io/d187f69b30dc6a15e9c82d570746349545459939c64ad4096b98074ac50b43aa.png",
+  "https://assets.mus.io/399f9f85d04d5183767ebb7f4bafaceccda101dfd2321a9e7cea82b47adbf810.png",
+  "https://assets.mus.io/aa8b0bf742848152beb50e142c21112f3198d9c32c8fa08208cc1daf71c7a3d2.png",
+  "https://assets.mus.io/5da86ce2c01b9a255966f6f9b099b5ad2f7890f16f202ae8cf82a596726f6586.png",
+  "https://assets.mus.io/1b965071a34e813d6c11f3bfd48988f1f199359fa5274cac4086be0f47d20403.png",
+  "https://assets.mus.io/7e6c57640ad72ad199835fa7a23cf78c059de067f02ba6eeee30d8c561d6b0d1.png",
+  "https://assets.mus.io/efe31f83668090214cd484cda1397e91ffcb4e873be6a86e41f983cdc4f26e32.png",
+  "https://assets.mus.io/23fcd804f834e4c282f933bc79d2aa9f04fc3f6fab7fd50818b342a4dc10d260.png",
+  "https://assets.mus.io/118368f2b9afc38ec7a4b23af9adc22329cd5d669b96a0507f2e9719302a5e5b.png",
+  "https://assets.mus.io/5b142c2f9242f1fb9f657672545f75af8efb5668eb0a39ff7364ad9a669d1f32.png",
+  "https://assets.mus.io/32b69e3c5b5dd013ebf20185718a4ce472002a9e8fe04b789fa46964ff242039.png",
+  "https://assets.mus.io/6d9f58cfad04a1aa64521f9630de93b56964e5181eb2a58ec4e4e0d83461d320.png",
+  "https://assets.mus.io/2b6b8faaecd9d4ea9183efde7d11c83c0d36348ff1e092fc9505a663770ec58d.png",
+  "https://assets.mus.io/aaa82cf5a01f2efd1d2aa4c30e202077892958846b69ad6108b514cd968b8ea7.png",
+  "https://assets.mus.io/5320be794c0bc3ad2c634f0be6a102de14b84960a57b97d0fe692b2b25ee84aa.png",
+  "https://assets.mus.io/18c8f7e6bed5f6567cd98cc3a96b53a6d73900b1015e6ddd1f853b6791c05bb8.png",
+  "https://assets.mus.io/f7ee35e9d8f49d2726f24f6216726360f735f484839cb4301c44476cc37244b9.png",
+  "https://assets.mus.io/5afbeb1a9318a595a9e33ad772131f223013665e7a1e7c577e23f07103dfa287.png",
+  "https://assets.mus.io/1cdadf5f8c442b97181ff2817e98add44521345c87cb3a65391e206acbaad6d1.png",
+  "https://assets.mus.io/24a1fcd2c37b3f5b454902c5827e9267cd67927707af03be262cb519cda38ae9.png",
+  "https://assets.mus.io/a6f7fa7e9546392573fcb6654b4249f6ec38635924536f1664ee750177c18d98.png",
+  "https://assets.mus.io/b4b5fe72e0ead131ebb7eb5d6125f74825239623d699b96cadcec1b8422722a9.png",
+  "https://assets.mus.io/4e30458068981d3001782458153813727ed01f9f9ba5aee2c1ed91728f989695.png",
+  "https://assets.mus.io/c42a46e8eeeab9f24469d6e785f9bacec086e1ea7d36238a595cddceae8426d3.png",
+  "https://assets.mus.io/281e4a9a1485d335271b0f84cef4125c38f38bf1355d0055cd67d10fed1d3328.png",
+  "https://assets.mus.io/c1835aa5dda0491559d1409a4bda2e142c29e4c818354bd07167fc2f5ca9b578.png",
+  "https://assets.mus.io/dc049d46161e81ab2be170256ed09a5154cc463d624bdece3b439018ee02bd53.png",
+  "https://assets.mus.io/932d347d762968d56c2ed9fad6fcb04e420b2603c79cb81b3baa8658b71a143b.png",
+  "https://assets.mus.io/1d217a9d3e3a6b391476302610adcba94c52d22e349bf3247518bb863fb85b68.png",
+  "https://assets.mus.io/affe4a3cf1d5ac7ee30890aa7630cc4e76197c683e12a548de8ee61483de3837.png",
+  "https://assets.mus.io/ee383253de1733dd663794496786a3c381809bf67beba126012643ddb3afd77f.png",
+  "https://assets.mus.io/350b46884f8feac98beca7f4abf808f707a8a3dd490fa9b0cba2961e0fe9d183.png",
+  "https://assets.mus.io/9464157b60109808859d0c6285c3679d7ac84a96f5201ad6224049f2e09d7539.png",
+  "https://assets.mus.io/0d357919550d738f673f24ba72b67a0ee5eeeda3819850dfe79a6ebbcedbf7d2.png",
+  "https://assets.mus.io/476a75744b43524241e85cb0fce847044eacfa483f126f69a1fe066d994fedf4.png",
+  "https://assets.mus.io/49247d0b9d0fa319170c65bbb2b608d5d4985846528e633f1ebb8942da10a2cf.png",
+  "https://assets.mus.io/2bc5073005134a3cf9b3af0dcfc56f532077a8b040ea673683b4a27447c25567.png",
+  "https://assets.mus.io/a05e2909ce331a3eb2d2ed3784bd2709412169872b2e1b031ec14b284176b43a.png",
+  "https://assets.mus.io/c8a4f93c5f4e7502a2400d250bf1cd8b08f7e9d4466b5cd0a7b3c491a82a34e3.png",
+  "https://assets.mus.io/b7d2db3169c0eab19f55b69ff9fac6b4239dadbf6f6ce485c90cab11414ec021.png",
+  "https://assets.mus.io/f8d5e9e6dfbae7a7955aaeb9c28a89f21ca8744ce163df65e3665256a5073e7b.png",
+  "https://assets.mus.io/954dc7bbfd541771aca0302b4370b4cdf125bc8723e597580bb6d1be9b035d16.png",
+  "https://assets.mus.io/364530a4b828852591dcd5a991df8d037b23f138f219a614afbb0c1657ce4206.png",
+  "https://assets.mus.io/79af0ea2adb51f190d1ce24da410de8bd5f0983854b547502f437da800eda226.png",
+  "https://assets.mus.io/d2934ebfd43ba560a937f7937b898be2b73b80c5a27aea9e904bb8cfb28e451f.png",
+  "https://assets.mus.io/0e85414eb41ca1fd0b4ead9d2dc2820839bca81aa87289ae240d54db4b05ca9c.png",
+  "https://assets.mus.io/9f077ca799b8ad1177195ddcc0538bc6db943dd002a90c9f5058e9d2d3896fe1.png",
+  "https://assets.mus.io/e5502a0cd8a976a11de9dc67bac51251c7606e5059b14ae3d73b83bd211cb587.png",
+  "https://assets.mus.io/faf9cb539067a02deb700f5dd2e9e689a17158f029ab2f63cbddea7bd22d8c7d.png",
+  "https://assets.mus.io/c87b6f65857140fb05215c2f122d4ad908dd829c665519ab273f8cbf3698225f.png",
+  "https://assets.mus.io/6425208a2d1e0603574f004ed7b0af2f20e55b4b1c36070e56bbb180c06dc507.png",
+  "https://assets.mus.io/79f85c7290b2829a4cd371ccc66187b55fc9c0dc6138d099a1070826b7d63bf0.png",
 ];
 
 // Developer partners
@@ -68,7 +123,7 @@ const developers = [
             <img 
               src={src} 
               alt="" 
-              loading={i < 14 ? "eager" : "lazy"}
+              loading={i < 22 ? "eager" : "lazy"}
               decoding="async"
               width="100"
               height="100"
@@ -591,8 +646,8 @@ const developers = [
   
   .image-grid {
     display: grid;
-    grid-template-columns: repeat(7, 120px);
-    grid-auto-rows: 120px;
+    grid-template-columns: repeat(11, 100px);
+    grid-auto-rows: 100px;
     gap: 0;
     position: absolute;
     top: 50%;
@@ -617,8 +672,8 @@ const developers = [
   
   @media (max-width: 768px) {
     .image-grid {
-      grid-template-columns: repeat(6, 100px);
-      grid-auto-rows: 100px;
+      grid-template-columns: repeat(9, 80px);
+      grid-auto-rows: 80px;
       gap: 0;
       transform: rotateX(20deg) scale(1.5);
     }
