@@ -113,6 +113,16 @@ const developers = [
 ---
 
 <Layout>
+  <!-- Header -->
+  <header class="absolute top-0 left-0 right-0 z-20 py-6 px-6">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <a href="/" class="text-white font-semibold">Musio</a>
+      <nav class="flex items-center gap-6">
+        <a href="/developers" class="text-gray-400 hover:text-white text-sm transition-colors">For Developers</a>
+      </nav>
+    </div>
+  </header>
+
   <!-- Hero Section -->
   <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
     <!-- Netflix-style Image Grid Background -->
@@ -560,6 +570,7 @@ const developers = [
         <nav class="flex gap-8 text-gray-400">
           <a href="https://support.musio.com" class="hover:text-white transition-colors">Support</a>
           <a href="https://musio.com/community" class="hover:text-white transition-colors">Community</a>
+          <a href="/developers" class="hover:text-white transition-colors">Developers</a>
           <a href="https://musio.com/privacy" class="hover:text-white transition-colors">Privacy</a>
         </nav>
         
@@ -594,8 +605,14 @@ const developers = [
       
       <!-- Developer CTA -->
       <p class="text-center text-gray-400 text-sm mt-8">
-        Instrument developer? We'll help bring your library to Musio. <a href="mailto:developers@musio.com" class="text-[#E94560] hover:underline">Get in touch</a>
+        Instrument developer? We'll help bring your library to Musio. <a href="/developers" class="text-[#E94560] hover:underline">Learn more</a>
       </p>
+      
+      <!-- Status -->
+      <div class="flex items-center justify-center gap-2 text-sm text-gray-500 mt-6">
+        <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+        <span>Musio Platform: Online & Independent</span>
+      </div>
       
       <!-- Copyright -->
       <p class="text-center text-gray-500 text-sm mt-4">
