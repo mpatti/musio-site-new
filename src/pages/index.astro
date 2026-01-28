@@ -222,7 +222,7 @@ const developers = [
       <!-- 2x2 Screenshot Grid -->
       <div class="grid md:grid-cols-2 gap-5">
         <div>
-          <div class="aspect-[16/10] overflow-hidden rounded-lg shadow-xl border border-[#1a1a1a]">
+          <div class="aspect-[16/10] overflow-hidden rounded-lg shadow-xl border border-[#1a1a1a] cursor-pointer lightbox-trigger hover:border-[#333] transition-colors" data-src="/screenshot-catalog.png">
             <img 
               src="/screenshot-catalog.png" 
               alt="Musio catalog browser showing instrument library grid" 
@@ -233,7 +233,7 @@ const developers = [
           <p class="text-gray-400 text-sm mt-3 text-center">Browse thousands of instruments</p>
         </div>
         <div>
-          <div class="aspect-[16/10] overflow-hidden rounded-lg shadow-xl border border-[#1a1a1a]">
+          <div class="aspect-[16/10] overflow-hidden rounded-lg shadow-xl border border-[#1a1a1a] cursor-pointer lightbox-trigger hover:border-[#333] transition-colors" data-src="/screenshot-search.png">
             <img 
               src="/screenshot-search.png" 
               alt="Musio search results for drums" 
@@ -244,7 +244,7 @@ const developers = [
           <p class="text-gray-400 text-sm mt-3 text-center">Find exactly what you need</p>
         </div>
         <div>
-          <div class="aspect-[16/10] overflow-hidden rounded-lg shadow-xl border border-[#1a1a1a]">
+          <div class="aspect-[16/10] overflow-hidden rounded-lg shadow-xl border border-[#1a1a1a] cursor-pointer lightbox-trigger hover:border-[#333] transition-colors" data-src="/screenshot-keyswitch.png">
             <img 
               src="/screenshot-keyswitch.png" 
               alt="Musio Vowels instrument with keyswitch articulations" 
@@ -255,7 +255,7 @@ const developers = [
           <p class="text-gray-400 text-sm mt-3 text-center">Keyswitching and advanced articulations</p>
         </div>
         <div>
-          <div class="aspect-[16/10] overflow-hidden rounded-lg shadow-xl border border-[#1a1a1a]">
+          <div class="aspect-[16/10] overflow-hidden rounded-lg shadow-xl border border-[#1a1a1a] cursor-pointer lightbox-trigger hover:border-[#333] transition-colors" data-src="/screenshot-mixer.png">
             <img 
               src="/screenshot-mixer.png" 
               alt="Musio mixer with multiple microphone positions" 
@@ -721,4 +721,82 @@ const developers = [
       transform: rotateX(20deg) scale(1.5);
     }
   }
+  
+  /* Lightbox */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    cursor: zoom-out;
+  }
+  
+  .lightbox.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .lightbox img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 0.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  }
+  
+  .lightbox-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  
+  .lightbox-close:hover {
+    opacity: 1;
+  }
 </style>
+
+<!-- Lightbox Overlay -->
+<div id="lightbox" class="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <img id="lightbox-img" src="" alt="Enlarged screenshot" />
+</div>
+
+<script>
+  // Lightbox functionality
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const triggers = document.querySelectorAll('.lightbox-trigger');
+  const closeBtn = document.querySelector('.lightbox-close');
+  
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const src = trigger.getAttribute('data-src');
+      lightboxImg.src = src;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  
+  lightbox.addEventListener('click', closeLightbox);
+  closeBtn.addEventListener('click', closeLightbox);
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
