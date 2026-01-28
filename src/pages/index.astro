@@ -161,7 +161,7 @@ const developers = [
       
       <!-- Headline -->
       <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-        The<br />
+        The <span class="cycling-word-container"><span id="cycling-word" class="cycling-word">Modern</span></span><br />
         <span class="text-[#E94560]">Instrument Platform</span>
       </h1>
       
@@ -766,6 +766,36 @@ const developers = [
   .lightbox-close:hover {
     opacity: 1;
   }
+  
+  /* Cycling word animation */
+  .cycling-word-container {
+    display: inline-block;
+    min-width: 280px;
+    text-align: left;
+  }
+  
+  @media (max-width: 768px) {
+    .cycling-word-container {
+      min-width: 180px;
+    }
+  }
+  
+  .cycling-word {
+    display: inline-block;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  
+  .cycling-word.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  
+  .cycling-word.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 </style>
 
 <!-- Lightbox Overlay -->
@@ -801,4 +831,33 @@ const developers = [
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeLightbox();
   });
+  
+  // Cycling word animation
+  const words = ['Modern', 'Complete', 'Human-first', 'Trusted', 'Powerful', 'Efficient'];
+  let currentIndex = 0;
+  const cyclingWord = document.getElementById('cycling-word');
+  
+  function cycleWord() {
+    // Fade out
+    cyclingWord.classList.add('fade-out');
+    
+    setTimeout(() => {
+      // Update word
+      currentIndex = (currentIndex + 1) % words.length;
+      cyclingWord.textContent = words[currentIndex];
+      
+      // Prepare for fade in
+      cyclingWord.classList.remove('fade-out');
+      cyclingWord.classList.add('fade-in');
+      
+      // Trigger reflow and fade in
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          cyclingWord.classList.remove('fade-in');
+        });
+      });
+    }, 400);
+  }
+  
+  setInterval(cycleWord, 2500);
 </script>
