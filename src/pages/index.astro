@@ -1,0 +1,672 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Instrument artwork from Musio's asset CDN for the Netflix-style grid
+const instrumentImages = [
+  "https://assets.mus.io/ff2b6e950ff58c595a2d9291805cf3ac29ab1200ba84ee545a09b5fa8584ff6e.png",
+  "https://assets.mus.io/0c16c49a0c870ab6e7ecfd338b2fd718d9e897c59aa261f9460c8879eb8c7584.png",
+  "https://assets.mus.io/6dd3f6be31e3e3eb08fd1cfd2133f3248300901f1b67b9704b4b3698d4950898.png",
+  "https://assets.mus.io/90a41f2cb73ed06ec2a1e58c2521296e4b94da40a95efe8640520f5eca819bc1.png",
+  "https://assets.mus.io/db563a22e50153920d3303ca6c9148a6a6804aa8dd97622bf1c391338171460e.png",
+  "https://assets.mus.io/57cb3bdc79b5e97eaba327e131e635d15fb9f48618412c206afaf05734fff9d7.png",
+  "https://assets.mus.io/ae9bf6ee368a5b7fac3cbf50d2edd7797dbf2347f26a23c1ffa70c616f307b54.png",
+  "https://assets.mus.io/77fc2e0cb0001bf38a46bae8cba79049ab267bf715ce80a575ca14fd0fc209f3.png",
+  "https://assets.mus.io/7688fa4cf4e290d122ef0f96a206ae913c6117961b4f7fd21a5f6b7af266e0e8.png",
+  "https://assets.mus.io/cc3a3c9d5622f83c67f1d71294af15a88709bf26bf870c6268da4bdf481eae68.png",
+  "https://assets.mus.io/5f64209e734559beeec5f6eb6a300a532f101a971748449d32b6e1b9104d24c1.png",
+  "https://assets.mus.io/c7f2b6686c0a2258f95a6b2cd5611e2c9de99def788f8f25f9e88718595993ce.png",
+  "https://assets.mus.io/a73f4e81f151008b4ac2d1f5d1b2b6f8c7c1c0cbc4c875c49388b7386f60fe91.png",
+  "https://assets.mus.io/54a7970f42264e090ba8d040f7572bf5451c71c8e40fd3e4cf1c17fbdab7b16d.png",
+  "https://assets.mus.io/91eb22dd09987567f022bd5d20ddeb30fe0acf6663710fac40ff5d6d4bf02b4d.png",
+  "https://assets.mus.io/ad93c98d63c5ed3248fce564d7e8eb56c0eec9650c362d45b336f283a53c4b65.png",
+  "https://assets.mus.io/54bd0cd6e5ef253d60f49a6546ba706bb6dea43b4985fd38d4288f781f28e33b.png",
+  "https://assets.mus.io/1dc3b4dacb81d6055069258ec6a269c83cad86b713b17791481df36eb62e6cd2.png",
+  "https://assets.mus.io/62597a20a1387ecff7b22d657ef6d6d8a81f560362cd8e5b384bee578e7aaba3.png",
+  "https://assets.mus.io/4c03b5984c504c0de951b88f6db8ac942b628d544a088a9565f765a16686516f.png",
+  "https://assets.mus.io/2345cfa1d3d8f7387b475730f239e5e059672a03c3a25c891bf2ce5a10c97ac9.png",
+  "https://assets.mus.io/6becd3b14e87fe32b1252dd4df8d0895933fb5fac8ccf85af2efefbb7ea8e234.png",
+  "https://assets.mus.io/401360489d2c0824ea175a6a7b437e89ccf4f9882f9340b67ab5de2d7437ba1c.png",
+  "https://assets.mus.io/46981bd50917977d95f2be4d77285028eb8482fa20c0c8d3338d2b6e1e68ab58.png",
+  "https://assets.mus.io/aa5fec9a7b31f8006473cad73916e8597411d66a499c9a5bdab204ba32e6d606.png",
+  "https://assets.mus.io/349e1a30f73d4a0bd6d1026fac09540317e37b1d16d9c27619c80deccab708fd.png",
+  "https://assets.mus.io/281b213745fdf1376ee40cdca079608b3f7632b2f96000f85fdb48562aa0d359.png",
+  "https://assets.mus.io/77e85bfcc115a41211915c752b5e70d3e2f6069f6d28023613cdbd904a49b2b6.png",
+  "https://assets.mus.io/2e375ccc64217f564c2aae76e0e8b7806bd1d961525a7fe788722461a3908d3b.png",
+  "https://assets.mus.io/3cf3ba54401addbb480a1828c1521d31e2743d609c60ca259bf169720c5724c6.png",
+  "https://assets.mus.io/10f4575e0d896ce4bd71a9b951323bf90ea70a510677507a05e9ec619ad0bbb1.png",
+  "https://assets.mus.io/c1fb0fa35f77c7ed10612aefa366211a102a67f38eceb4a9acf760acdf98c07d.png",
+  "https://assets.mus.io/2a768ca57374bd2ae6197563a783811aac16e5a120b4c7939215898029cc0b5f.png",
+  "https://assets.mus.io/6105393e33c7821e0a98ed6d9521f6cf8449d2abcfadb4da75de7d620d98d30a.png",
+  "https://assets.mus.io/e238686257fe005be13cd2f6e2aa71dc1750142b4db2443dd588134a952cabb7.png",
+  "https://assets.mus.io/95e5fb6b6a9ae843c4092bc83d7fe5f70a66dd74125a67382af77fe205927f03.png",
+  "https://assets.mus.io/5e6678b1dfba3a7c56e67c311d19eda0e860a93eb909222cab2165c2afd3c9c5.png",
+  "https://assets.mus.io/08a549f6c4f7fe95d908bbe6d065f02e684589e652aa6c19df24be2040c275cb.png",
+  "https://assets.mus.io/48797ba221b09d58d38bf475f99cb7f6b0153c92b54e136e9546d91e4513088f.png",
+  "https://assets.mus.io/da52f37f37b01530ba11fc35abf4ccc8d57994340f572295c702b2ca60be5802.png",
+  "https://assets.mus.io/a1edecd3b1527a134a5fea666d68d7b0aed112fc56237a0278893a252ea6a71b.png",
+  "https://assets.mus.io/08ee708999aacf7bc421de18282a8f7ed745f0daf0c1f1790ce9126ffcbc0936.png",
+  "https://assets.mus.io/26972cac458fd6d676d5dcddd71582695cfa0dc446e3c3dc370f255393f7faa7.png",
+  "https://assets.mus.io/7e72ac36e2afa1bc33259eeed45aa496a7040079b0c7f510a4ec9d62ef3d38d0.png",
+  "https://assets.mus.io/bfb3deeb76562e7d1f621047229c4124b09b1173ca34184c5da07237d9ee7858.png",
+  "https://assets.mus.io/21191d2771156504d857619c9fafd70ca5191dc84760794d8cc99af986f79ff2.png",
+  "https://assets.mus.io/d187f69b30dc6a15e9c82d570746349545459939c64ad4096b98074ac50b43aa.png",
+  "https://assets.mus.io/399f9f85d04d5183767ebb7f4bafaceccda101dfd2321a9e7cea82b47adbf810.png",
+  "https://assets.mus.io/aa8b0bf742848152beb50e142c21112f3198d9c32c8fa08208cc1daf71c7a3d2.png",
+  "https://assets.mus.io/5da86ce2c01b9a255966f6f9b099b5ad2f7890f16f202ae8cf82a596726f6586.png",
+  "https://assets.mus.io/1b965071a34e813d6c11f3bfd48988f1f199359fa5274cac4086be0f47d20403.png",
+  "https://assets.mus.io/7e6c57640ad72ad199835fa7a23cf78c059de067f02ba6eeee30d8c561d6b0d1.png",
+  "https://assets.mus.io/efe31f83668090214cd484cda1397e91ffcb4e873be6a86e41f983cdc4f26e32.png",
+  "https://assets.mus.io/23fcd804f834e4c282f933bc79d2aa9f04fc3f6fab7fd50818b342a4dc10d260.png",
+  "https://assets.mus.io/118368f2b9afc38ec7a4b23af9adc22329cd5d669b96a0507f2e9719302a5e5b.png",
+  "https://assets.mus.io/5b142c2f9242f1fb9f657672545f75af8efb5668eb0a39ff7364ad9a669d1f32.png",
+  "https://assets.mus.io/32b69e3c5b5dd013ebf20185718a4ce472002a9e8fe04b789fa46964ff242039.png",
+  "https://assets.mus.io/6d9f58cfad04a1aa64521f9630de93b56964e5181eb2a58ec4e4e0d83461d320.png",
+  "https://assets.mus.io/2b6b8faaecd9d4ea9183efde7d11c83c0d36348ff1e092fc9505a663770ec58d.png",
+  "https://assets.mus.io/aaa82cf5a01f2efd1d2aa4c30e202077892958846b69ad6108b514cd968b8ea7.png",
+  "https://assets.mus.io/5320be794c0bc3ad2c634f0be6a102de14b84960a57b97d0fe692b2b25ee84aa.png",
+  "https://assets.mus.io/18c8f7e6bed5f6567cd98cc3a96b53a6d73900b1015e6ddd1f853b6791c05bb8.png",
+  "https://assets.mus.io/f7ee35e9d8f49d2726f24f6216726360f735f484839cb4301c44476cc37244b9.png",
+  "https://assets.mus.io/5afbeb1a9318a595a9e33ad772131f223013665e7a1e7c577e23f07103dfa287.png",
+  "https://assets.mus.io/1cdadf5f8c442b97181ff2817e98add44521345c87cb3a65391e206acbaad6d1.png",
+  "https://assets.mus.io/24a1fcd2c37b3f5b454902c5827e9267cd67927707af03be262cb519cda38ae9.png",
+  "https://assets.mus.io/a6f7fa7e9546392573fcb6654b4249f6ec38635924536f1664ee750177c18d98.png",
+  "https://assets.mus.io/b4b5fe72e0ead131ebb7eb5d6125f74825239623d699b96cadcec1b8422722a9.png",
+  "https://assets.mus.io/4e30458068981d3001782458153813727ed01f9f9ba5aee2c1ed91728f989695.png",
+  "https://assets.mus.io/c42a46e8eeeab9f24469d6e785f9bacec086e1ea7d36238a595cddceae8426d3.png",
+  "https://assets.mus.io/281e4a9a1485d335271b0f84cef4125c38f38bf1355d0055cd67d10fed1d3328.png",
+  "https://assets.mus.io/c1835aa5dda0491559d1409a4bda2e142c29e4c818354bd07167fc2f5ca9b578.png",
+  "https://assets.mus.io/dc049d46161e81ab2be170256ed09a5154cc463d624bdece3b439018ee02bd53.png",
+  "https://assets.mus.io/932d347d762968d56c2ed9fad6fcb04e420b2603c79cb81b3baa8658b71a143b.png",
+  "https://assets.mus.io/1d217a9d3e3a6b391476302610adcba94c52d22e349bf3247518bb863fb85b68.png",
+  "https://assets.mus.io/affe4a3cf1d5ac7ee30890aa7630cc4e76197c683e12a548de8ee61483de3837.png",
+  "https://assets.mus.io/ee383253de1733dd663794496786a3c381809bf67beba126012643ddb3afd77f.png",
+  "https://assets.mus.io/350b46884f8feac98beca7f4abf808f707a8a3dd490fa9b0cba2961e0fe9d183.png",
+  "https://assets.mus.io/9464157b60109808859d0c6285c3679d7ac84a96f5201ad6224049f2e09d7539.png",
+  "https://assets.mus.io/0d357919550d738f673f24ba72b67a0ee5eeeda3819850dfe79a6ebbcedbf7d2.png",
+  "https://assets.mus.io/476a75744b43524241e85cb0fce847044eacfa483f126f69a1fe066d994fedf4.png",
+  "https://assets.mus.io/49247d0b9d0fa319170c65bbb2b608d5d4985846528e633f1ebb8942da10a2cf.png",
+  "https://assets.mus.io/2bc5073005134a3cf9b3af0dcfc56f532077a8b040ea673683b4a27447c25567.png",
+  "https://assets.mus.io/a05e2909ce331a3eb2d2ed3784bd2709412169872b2e1b031ec14b284176b43a.png",
+  "https://assets.mus.io/c8a4f93c5f4e7502a2400d250bf1cd8b08f7e9d4466b5cd0a7b3c491a82a34e3.png",
+  "https://assets.mus.io/b7d2db3169c0eab19f55b69ff9fac6b4239dadbf6f6ce485c90cab11414ec021.png",
+  "https://assets.mus.io/f8d5e9e6dfbae7a7955aaeb9c28a89f21ca8744ce163df65e3665256a5073e7b.png",
+  "https://assets.mus.io/954dc7bbfd541771aca0302b4370b4cdf125bc8723e597580bb6d1be9b035d16.png",
+  "https://assets.mus.io/364530a4b828852591dcd5a991df8d037b23f138f219a614afbb0c1657ce4206.png",
+  "https://assets.mus.io/79af0ea2adb51f190d1ce24da410de8bd5f0983854b547502f437da800eda226.png",
+  "https://assets.mus.io/d2934ebfd43ba560a937f7937b898be2b73b80c5a27aea9e904bb8cfb28e451f.png",
+  "https://assets.mus.io/0e85414eb41ca1fd0b4ead9d2dc2820839bca81aa87289ae240d54db4b05ca9c.png",
+  "https://assets.mus.io/9f077ca799b8ad1177195ddcc0538bc6db943dd002a90c9f5058e9d2d3896fe1.png",
+  "https://assets.mus.io/e5502a0cd8a976a11de9dc67bac51251c7606e5059b14ae3d73b83bd211cb587.png",
+  "https://assets.mus.io/faf9cb539067a02deb700f5dd2e9e689a17158f029ab2f63cbddea7bd22d8c7d.png",
+  "https://assets.mus.io/c87b6f65857140fb05215c2f122d4ad908dd829c665519ab273f8cbf3698225f.png",
+  "https://assets.mus.io/6425208a2d1e0603574f004ed7b0af2f20e55b4b1c36070e56bbb180c06dc507.png",
+  "https://assets.mus.io/79f85c7290b2829a4cd371ccc66187b55fc9c0dc6138d099a1070826b7d63bf0.png",
+];
+
+// Developer partners
+const developers = [
+  "Cinesamples",
+  "ProjectSAM", 
+  "Soundiron",
+  "Audio Ollie",
+];
+---
+
+<Layout>
+  <!-- Hero Section -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Netflix-style Image Grid Background -->
+    <div class="absolute inset-0 grid-background">
+      <div class="image-grid">
+        {instrumentImages.map((src, i) => (
+          <div class="grid-item" style={`animation-delay: ${i * 0.1}s`}>
+            <img src={src} alt="" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Gradient Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-[#0a0a0a]/60"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-transparent to-transparent"></div>
+    
+    <!-- Hero Content -->
+    <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+      <!-- Logo -->
+      <div class="mb-8">
+        <img 
+          src="https://musio-discover-oqhe.vercel.app/musio-logo.png" 
+          alt="Musio" 
+          class="h-12 md:h-16 mx-auto"
+        />
+      </div>
+      
+      <!-- Headline -->
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+        The Next Generation<br />
+        <span class="text-[#E94560]">Instrument Platform</span>
+      </h1>
+      
+      <!-- Subheadline -->
+      <p class="text-xl md:text-2xl text-gray-400 mb-8 max-w-3xl mx-auto">
+        One plugin. Every instrument. World-class libraries from the developers you trust.
+      </p>
+      
+      <!-- Developer Logos / Names -->
+      <div class="mb-10">
+        <p class="text-sm text-gray-500 uppercase tracking-widest mb-4">Featuring libraries from</p>
+        <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-3">
+          {developers.map((name) => (
+            <span class="text-gray-400 text-lg font-medium hover:text-white transition-colors duration-200">
+              {name}
+            </span>
+          ))}
+          <span class="text-gray-500 text-lg">+ more</span>
+        </div>
+      </div>
+      
+      <!-- CTA -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a 
+          href="https://portal.musio.com/account/download-musio" 
+          class="bg-[#E94560] hover:bg-[#d63d56] text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all duration-200 hover:scale-105"
+        >
+          Get Started Free
+        </a>
+        <a 
+          href="#pricing" 
+          class="text-gray-400 hover:text-white transition-colors duration-200"
+        >
+          View pricing
+        </a>
+      </div>
+      
+      <!-- Free callout -->
+      <p class="text-gray-500 text-sm mt-4">35 instruments free. No credit card required.</p>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-20 px-6 border-t border-[#1a1a1a]">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Everything you need, nothing you don't</h2>
+        <p class="text-gray-400 text-lg">Industry-leading sounds. Refreshingly simple interface.</p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="text-center">
+          <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-[#1a1a1a] flex items-center justify-center">
+            <svg class="w-7 h-7 text-[#E94560]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Instant Access</h3>
+          <p class="text-gray-400 text-sm">No manual installs or file management. Every instrument loads from the cloud in seconds.</p>
+        </div>
+        
+        <!-- Feature 2 -->
+        <div class="text-center">
+          <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-[#1a1a1a] flex items-center justify-center">
+            <svg class="w-7 h-7 text-[#E94560]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Ultra-Light Performance</h3>
+          <p class="text-gray-400 text-sm">Pro-grade sound with minimal CPU and RAM. More music in your DAW, less strain on your system.</p>
+        </div>
+        
+        <!-- Feature 3 -->
+        <div class="text-center">
+          <div class="w-14 h-14 mx-auto mb-4 rounded-xl bg-[#1a1a1a] flex items-center justify-center">
+            <svg class="w-7 h-7 text-[#E94560]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Simple Interface</h3>
+          <p class="text-gray-400 text-sm">A clean workspace that keeps you focused on creating, not configuring. No sea of knobs and faders.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAW Compatibility Section -->
+  <section class="py-16 px-6 border-t border-[#1a1a1a]">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="text-gray-500 text-sm uppercase tracking-widest mb-8">Works with your favorite DAW</p>
+      <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+        <!-- Logic Pro -->
+        <div class="flex flex-col items-center gap-2">
+          <img src="/daw-logic.png" alt="Logic Pro" class="w-12 h-12 object-contain" />
+          <span class="text-xs text-gray-500">Logic Pro</span>
+        </div>
+        <!-- Ableton -->
+        <div class="flex flex-col items-center gap-2">
+          <img src="/daw-ableton.png" alt="Ableton Live" class="w-12 h-12 object-contain invert" />
+          <span class="text-xs text-gray-500">Ableton</span>
+        </div>
+        <!-- Pro Tools -->
+        <div class="flex flex-col items-center gap-2">
+          <img src="/daw-protools.png" alt="Pro Tools" class="w-12 h-12 object-contain" />
+          <span class="text-xs text-gray-500">Pro Tools</span>
+        </div>
+        <!-- FL Studio -->
+        <div class="flex flex-col items-center gap-2">
+          <img src="/daw-flstudio.png" alt="FL Studio" class="w-12 h-12 object-contain" />
+          <span class="text-xs text-gray-500">FL Studio</span>
+        </div>
+        <!-- Cubase -->
+        <div class="flex flex-col items-center gap-2">
+          <img src="/daw-cubase.png" alt="Cubase" class="w-12 h-12 object-contain" />
+          <span class="text-xs text-gray-500">Cubase</span>
+        </div>
+        <!-- Digital Performer -->
+        <div class="flex flex-col items-center gap-2">
+          <img src="/daw-dp.png" alt="Digital Performer" class="w-12 h-12 object-contain" />
+          <span class="text-xs text-gray-500">Digital Performer</span>
+        </div>
+        <!-- And more -->
+        <div class="flex flex-col items-center gap-2">
+          <span class="w-12 h-12 flex items-center justify-center text-2xl text-gray-500">+</span>
+          <span class="text-xs text-gray-500">and more</span>
+        </div>
+      </div>
+      <p class="text-gray-600 text-sm mt-8">VST3, AU, and AAX compatible</p>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-20 px-6 border-t border-[#1a1a1a]">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-12">Loved by composers worldwide</h2>
+      
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Testimonial 1 -->
+        <div class="bg-[#141414] rounded-xl p-6">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-5 h-5 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-gray-300 mb-4">"Musio is hands down the best deal around when it comes to orchestral sample libraries."</p>
+          <p class="text-gray-500 text-sm">— Ellis</p>
+        </div>
+        
+        <!-- Testimonial 2 -->
+        <div class="bg-[#141414] rounded-xl p-6">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-5 h-5 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-gray-300 mb-4">"Musio has been indispensable for my composition work. Easy, intuitive UI, quick to pick up."</p>
+          <p class="text-gray-500 text-sm">— Matthew</p>
+        </div>
+        
+        <!-- Testimonial 3 -->
+        <div class="bg-[#141414] rounded-xl p-6">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-5 h-5 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-gray-300 mb-4">"The sound quality is incredible for the CPU and RAM footprint. A no-nonsense approach."</p>
+          <p class="text-gray-500 text-sm">— Verified User</p>
+        </div>
+      </div>
+      
+      <p class="text-center mt-8">
+        <a href="https://www.reviews.io/company-reviews/store/www.musio.com" class="text-gray-500 hover:text-white text-sm transition-colors">
+          Read more reviews →
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="py-24 px-6 border-t border-[#1a1a1a]">
+    <div class="max-w-6xl mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Choose Your Plan</h2>
+        <p class="text-gray-400 text-lg">Start free, then subscribe or buy to own.</p>
+      </div>
+      
+      <!-- Pricing Cards -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        
+        <!-- Free Tier - Musio Essentials -->
+        <div class="bg-[#141414] border border-[#2a2a2a] rounded-2xl p-8 hover:border-[#3a3a3a] transition-colors duration-200 flex flex-col">
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-white mb-2">Essentials</h3>
+            <div class="flex items-baseline gap-2">
+              <span class="text-4xl font-bold">Free</span>
+            </div>
+            <p class="text-gray-500 mt-1">No credit card required</p>
+          </div>
+          
+          <ul class="space-y-4 mb-8 flex-grow">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300"><strong class="text-white">35</strong> premium instruments</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300">Production-ready sounds</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300">Free platform updates</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300">Forever free</span>
+            </li>
+          </ul>
+          
+          <a 
+            href="https://portal.musio.com/account/download-musio" 
+            class="block w-full text-center bg-[#2a2a2a] hover:bg-[#3a3a3a] text-white font-semibold py-3 rounded-lg transition-colors duration-200"
+          >
+            Download Free
+          </a>
+        </div>
+        
+        <!-- Musio+ Tier -->
+        <div class="bg-[#141414] border border-[#2a2a2a] rounded-2xl p-8 hover:border-[#3a3a3a] transition-colors duration-200 flex flex-col">
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-white mb-2">Musio+</h3>
+            <div class="flex items-baseline gap-2">
+              <span class="text-4xl font-bold">$9</span>
+              <span class="text-gray-400">/month</span>
+            </div>
+            <p class="text-gray-500 mt-1">or $99/year <span class="text-[#E94560]">(save 17%)</span></p>
+          </div>
+          
+          <ul class="space-y-4 mb-8 flex-grow">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300">Access to <strong class="text-white">Cinesamples</strong> complete library</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300">500+ premium instruments</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300">New releases included</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300">Cancel anytime</span>
+            </li>
+          </ul>
+          
+          <a 
+            href="https://portal.musio.com/account/musio-plus" 
+            class="block w-full text-center bg-[#2a2a2a] hover:bg-[#3a3a3a] text-white font-semibold py-3 rounded-lg transition-colors duration-200"
+          >
+            Start Free Trial
+          </a>
+        </div>
+        
+        <!-- Musio Pro Tier -->
+        <div class="bg-[#141414] border-2 border-[#E94560] rounded-2xl p-8 relative flex flex-col">
+          <!-- Popular Badge -->
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+            <span class="bg-[#E94560] text-white text-sm font-semibold px-4 py-1 rounded-full">
+              Best Value
+            </span>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-[#E94560] mb-2">Musio Pro</h3>
+            <div class="flex items-baseline gap-2">
+              <span class="text-4xl font-bold">$19</span>
+              <span class="text-gray-400">/month</span>
+            </div>
+            <p class="text-gray-500 mt-1">or $199/year <span class="text-[#E94560]">(save 13%)</span></p>
+          </div>
+          
+          <ul class="space-y-4 mb-8 flex-grow">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300"><strong class="text-white">Everything</strong> from <strong class="text-white">ALL developers</strong></span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300"><strong class="text-white">2,300+</strong> premium instruments</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300">Cinesamples, ProjectSAM, Soundiron & more</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300">Every new release, day one</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300">Cancel anytime</span>
+            </li>
+          </ul>
+          
+          <a 
+            href="https://portal.musio.com/account/musio-plus" 
+            class="block w-full text-center bg-[#E94560] hover:bg-[#d63d56] text-white font-semibold py-3 rounded-lg transition-all duration-200 hover:scale-[1.02]"
+          >
+            Start Free Trial
+          </a>
+        </div>
+        
+        <!-- Marketplace Tier -->
+        <div class="bg-[#141414] border border-[#2a2a2a] rounded-2xl p-8 hover:border-[#3a3a3a] transition-colors duration-200 flex flex-col">
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-white mb-2">Marketplace</h3>
+            <div class="flex items-baseline gap-2">
+              <span class="text-4xl font-bold">Buy</span>
+            </div>
+            <p class="text-gray-500 mt-1">Own forever, no subscription</p>
+          </div>
+          
+          <ul class="space-y-4 mb-8 flex-grow">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300">Purchase only what you need</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300"><strong class="text-white">Own forever</strong> — no recurring fees</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300">Libraries from top developers</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300">Works with any plan or standalone</span>
+            </li>
+          </ul>
+          
+          <a 
+            href="https://portal.musio.com/marketplace/" 
+            class="block w-full text-center bg-[#2a2a2a] hover:bg-[#3a3a3a] text-white font-semibold py-3 rounded-lg transition-colors duration-200"
+          >
+            Browse Marketplace
+          </a>
+        </div>
+      </div>
+      
+      <!-- Bottom Note -->
+      <p class="text-center text-gray-500 mt-10 text-sm">
+        All plans include free platform updates and top-notch customer support.
+      </p>
+      
+      <!-- Educational Pricing -->
+      <p class="text-center mt-4">
+        <a href="https://musio.com/edu" class="text-[#E94560] hover:underline text-sm">
+          Are you a student or educator? View educational pricing here.
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="py-20 px-6 border-t border-[#1a1a1a]">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to start creating?</h2>
+      <p class="text-gray-400 text-lg mb-8">Join thousands of composers making music with Musio.</p>
+      <a 
+        href="https://portal.musio.com/account/download-musio" 
+        class="inline-block bg-[#E94560] hover:bg-[#d63d56] text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all duration-200 hover:scale-105"
+      >
+        Get Started Free
+      </a>
+      <p class="text-gray-500 text-sm mt-4">35 instruments free. No credit card required.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-[#1a1a1a] py-12 px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <!-- Logo -->
+        <img 
+          src="https://musio-discover-oqhe.vercel.app/musio-logo.png" 
+          alt="Musio" 
+          class="h-8"
+        />
+        
+        <!-- Links -->
+        <nav class="flex gap-8 text-gray-500">
+          <a href="https://support.musio.com" class="hover:text-white transition-colors">Support</a>
+          <a href="https://musio.com/community" class="hover:text-white transition-colors">Community</a>
+          <a href="https://musio.com/privacy" class="hover:text-white transition-colors">Privacy</a>
+        </nav>
+        
+        <!-- Social Links -->
+        <div class="flex items-center gap-4">
+          <!-- Discord -->
+          <a href="https://discord.gg/wVbyUyQj9j" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-white transition-colors" aria-label="Discord">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+            </svg>
+          </a>
+          <!-- YouTube -->
+          <a href="https://www.youtube.com/@musio.official" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-white transition-colors" aria-label="YouTube">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </a>
+          <!-- X (Twitter) -->
+          <a href="https://x.com/musio" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-white transition-colors" aria-label="X">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/musio" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-white transition-colors" aria-label="Instagram">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Copyright -->
+      <p class="text-center text-gray-600 text-sm mt-8">
+        &copy; {new Date().getFullYear()} Musio. All rights reserved.
+      </p>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  .grid-background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(14, 100px);
+    grid-auto-rows: 100px;
+    gap: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%) perspective(800px) rotateX(30deg) scale(2.2);
+  }
+  
+  .grid-item {
+    overflow: hidden;
+    opacity: 1;
+    filter: blur(1px);
+    width: 100%;
+    height: 100%;
+  }
+  
+  .grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  @media (max-width: 768px) {
+    .image-grid {
+      grid-template-columns: repeat(10, 80px);
+      grid-auto-rows: 80px;
+      gap: 0;
+      transform: rotateX(20deg) scale(1.5);
+    }
+  }
+</style>
