@@ -1,0 +1,325 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Education Pricing - Musio" description="Discounted Musio access for students and educators.">
+  <!-- Header -->
+  <header class="border-b border-[#1a1a1a]">
+    <div class="max-w-6xl mx-auto px-6 py-6 flex justify-between items-center">
+      <a href="/">
+        <img src="/logo.png" alt="Musio" class="h-8" />
+      </a>
+      <a href="/#pricing" class="text-gray-400 hover:text-white transition-colors">
+        ← Back to pricing
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="py-16 px-6 text-center">
+    <div class="max-w-3xl mx-auto">
+      <span class="inline-block bg-[#E94560]/20 text-[#E94560] text-sm font-semibold px-4 py-2 rounded-full mb-6">
+        Education Discount
+      </span>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Musio for Education</h1>
+      <p class="text-gray-300 text-lg">
+        Discounted annual access for students, educators, and institutions.
+      </p>
+    </div>
+  </section>
+
+  <!-- Pricing Cards -->
+  <section class="py-12 px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-8">
+        
+        <!-- Musio EDU -->
+        <div class="bg-[#141414] border border-[#2a2a2a] rounded-2xl p-8 flex flex-col">
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-white mb-2">Musio</h3>
+            <div class="flex items-baseline gap-2">
+              <span class="text-gray-500 line-through text-2xl">$79</span>
+              <span class="text-4xl font-bold">$49</span>
+              <span class="text-gray-300">/year</span>
+            </div>
+            <p class="text-[#E94560] text-sm mt-1">Save 38% with EDU pricing</p>
+          </div>
+          
+          <ul class="space-y-4 mb-8 flex-grow">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300"><strong class="text-white">2,300</strong> curated instruments</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300">Fixed starter collection</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300">Renewable annually with valid EDU status</span>
+            </li>
+          </ul>
+          
+          <button 
+            onclick="openEduForm('musio')"
+            class="block w-full text-center bg-[#2a2a2a] hover:bg-[#3a3a3a] text-white font-semibold py-3 rounded-lg transition-colors duration-200 cursor-pointer"
+          >
+            Verify EDU Status
+          </button>
+        </div>
+        
+        <!-- Musio Pro EDU -->
+        <div class="bg-[#141414] border-2 border-[#E94560] rounded-2xl p-8 relative flex flex-col">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+            <span class="bg-[#E94560] text-white text-sm font-semibold px-4 py-1 rounded-full">
+              Best Value
+            </span>
+          </div>
+          
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-[#E94560] mb-2">Musio Pro</h3>
+            <div class="flex items-baseline gap-2">
+              <span class="text-gray-500 line-through text-2xl">$149</span>
+              <span class="text-4xl font-bold">$99</span>
+              <span class="text-gray-300">/year</span>
+            </div>
+            <p class="text-[#E94560] text-sm mt-1">Save 34% with EDU pricing</p>
+          </div>
+          
+          <ul class="space-y-4 mb-8 flex-grow">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300"><strong class="text-white">Every instrument</strong> from every developer</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300">New releases automatically included</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-300">Renewable annually with valid EDU status</span>
+            </li>
+          </ul>
+          
+          <button
+            onclick="openEduForm('pro')"
+            class="block w-full text-center bg-[#E94560] hover:bg-[#d63d56] text-white font-semibold py-3 rounded-lg transition-all duration-200 hover:scale-[1.02] cursor-pointer"
+          >
+            Verify EDU Status
+          </button>
+        </div>
+        
+      </div>
+      
+      <p class="text-center mt-8 text-gray-500 text-sm">
+        EDU pricing requires annual verification of student or educator status.
+      </p>
+    </div>
+  </section>
+
+  <!-- Institutional Licensing -->
+  <section class="py-12 px-6 border-t border-[#1a1a1a]">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-2xl font-bold mb-4">Need institutional or bulk licenses?</h2>
+      <p class="text-gray-400 mb-6">
+        We offer custom pricing for schools, universities, and educational programs.
+      </p>
+      <a 
+        href="mailto:edu@musio.com?subject=Institutional Licensing Inquiry"
+        class="inline-block bg-[#2a2a2a] hover:bg-[#3a3a3a] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+      >
+        Contact Us
+      </a>
+    </div>
+  </section>
+
+  <!-- EDU Verification Modal -->
+  <div id="edu-modal" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center p-4">
+    <div class="bg-[#141414] rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-6 border-b border-[#2a2a2a] flex justify-between items-center">
+        <h3 id="modal-title" class="text-xl font-bold">Verify EDU Status</h3>
+        <button onclick="closeEduForm()" class="text-gray-400 hover:text-white">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <form id="edu-form" class="p-6 space-y-4">
+        <input type="hidden" id="selected-plan" name="plan" value="" />
+        
+        <div>
+          <label class="block text-sm text-gray-400 mb-2">First Name *</label>
+          <input 
+            type="text" 
+            name="firstName" 
+            required
+            class="w-full bg-[#0a0a0a] border border-[#2a2a2a] rounded-lg px-4 py-3 text-white focus:border-[#E94560] focus:outline-none transition-colors"
+          />
+        </div>
+        
+        <div>
+          <label class="block text-sm text-gray-400 mb-2">Last Name *</label>
+          <input 
+            type="text" 
+            name="lastName" 
+            required
+            class="w-full bg-[#0a0a0a] border border-[#2a2a2a] rounded-lg px-4 py-3 text-white focus:border-[#E94560] focus:outline-none transition-colors"
+          />
+        </div>
+        
+        <div>
+          <label class="block text-sm text-gray-400 mb-2">Email *</label>
+          <input 
+            type="email" 
+            name="email" 
+            required
+            class="w-full bg-[#0a0a0a] border border-[#2a2a2a] rounded-lg px-4 py-3 text-white focus:border-[#E94560] focus:outline-none transition-colors"
+            placeholder="Use your .edu email if available"
+          />
+        </div>
+        
+        <div>
+          <label class="block text-sm text-gray-400 mb-2">Institution / School *</label>
+          <input 
+            type="text" 
+            name="institution" 
+            required
+            class="w-full bg-[#0a0a0a] border border-[#2a2a2a] rounded-lg px-4 py-3 text-white focus:border-[#E94560] focus:outline-none transition-colors"
+          />
+        </div>
+        
+        <div>
+          <label class="block text-sm text-gray-400 mb-2">Proof of Enrollment *</label>
+          <p class="text-xs text-gray-500 mb-2">Student/faculty ID, enrollment confirmation, or class schedule</p>
+          <input 
+            type="file" 
+            name="proof" 
+            required
+            accept="image/*,.pdf"
+            class="w-full bg-[#0a0a0a] border border-[#2a2a2a] rounded-lg px-4 py-3 text-white focus:border-[#E94560] focus:outline-none transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#2a2a2a] file:text-white file:cursor-pointer"
+          />
+          <p class="text-xs text-gray-500 mt-1">Max file size: 10MB</p>
+        </div>
+        
+        <div>
+          <label class="block text-sm text-gray-400 mb-2">Additional Details (optional)</label>
+          <textarea 
+            name="details"
+            rows="3"
+            class="w-full bg-[#0a0a0a] border border-[#2a2a2a] rounded-lg px-4 py-3 text-white focus:border-[#E94560] focus:outline-none transition-colors resize-none"
+            placeholder="Anything else you'd like us to know..."
+          ></textarea>
+        </div>
+        
+        <div class="flex items-start gap-3">
+          <input 
+            type="checkbox" 
+            name="marketing" 
+            id="marketing"
+            class="mt-1 w-4 h-4 rounded border-[#2a2a2a] bg-[#0a0a0a] text-[#E94560] focus:ring-[#E94560]"
+          />
+          <label for="marketing" class="text-sm text-gray-400">
+            I'd like to receive emails about news, updates, and promotions
+          </label>
+        </div>
+        
+        <button 
+          type="submit"
+          class="w-full bg-[#E94560] hover:bg-[#d63d56] text-white font-semibold py-3 rounded-lg transition-colors mt-4"
+        >
+          Submit Verification Request
+        </button>
+        
+        <p class="text-xs text-gray-500 text-center">
+          We'll review your submission and get back to you within 1-2 business days.
+        </p>
+      </form>
+      
+      <!-- Success State -->
+      <div id="edu-success" class="p-6 text-center hidden">
+        <div class="w-16 h-16 bg-[#E94560]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-[#E94560]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Request Received!</h3>
+        <p class="text-gray-400 mb-6">
+          We'll review your submission and email you within 1-2 business days with next steps.
+        </p>
+        <button 
+          onclick="closeEduForm()"
+          class="bg-[#2a2a2a] hover:bg-[#3a3a3a] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-[#1a1a1a] py-8 px-6">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+      <img src="/logo.png" alt="Musio" class="h-6" />
+      <p class="text-gray-500 text-sm">© 2026 Cinesamples, Inc. All rights reserved.</p>
+    </div>
+  </footer>
+</Layout>
+
+<script>
+  const modal = document.getElementById('edu-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const selectedPlan = document.getElementById('selected-plan');
+  const eduForm = document.getElementById('edu-form');
+  const eduSuccess = document.getElementById('edu-success');
+  
+  window.openEduForm = function(plan) {
+    selectedPlan.value = plan;
+    modalTitle.textContent = plan === 'pro' ? 'Verify EDU Status — Musio Pro' : 'Verify EDU Status — Musio';
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  };
+  
+  window.closeEduForm = function() {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = '';
+    // Reset form
+    eduForm.classList.remove('hidden');
+    eduSuccess.classList.add('hidden');
+    eduForm.reset();
+  };
+  
+  // Close on backdrop click
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeEduForm();
+  });
+  
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeEduForm();
+  });
+  
+  // Form submission
+  eduForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    // In production, you'd send this to your backend
+    // For now, just show success state
+    eduForm.classList.add('hidden');
+    eduSuccess.classList.remove('hidden');
+  });
+</script>
