@@ -1,0 +1,368 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Mock data for demo
+const user = {
+  name: "Mike Patti",
+  email: "mpatti@cinesamples.com"
+};
+
+const licenses = [
+  { name: "Musio 1", type: "NFR", status: "Active" },
+  { name: "Musio+", type: "NFR", status: "Active" },
+  { name: "Studio Guitars: Banjo", type: "NFR", status: "Active" },
+  { name: "Sketchpad: Monochrome", type: "NFR", status: "Active" },
+  { name: "Emotional Piano", type: "BETA", status: "Active" },
+  { name: "Hyperion Brass Core", type: "BETA", status: "Active" },
+  { name: "Hyperion Brass Pro", type: "BETA", status: "Active" },
+  { name: "Hyperion Strings Core", type: "BETA", status: "Active" },
+  { name: "Hyperion Strings Pro", type: "BETA", status: "Active" },
+  { name: "Apocalypse Percussion Ensemble", type: "BETA", status: "Active" },
+  { name: "Scoring Synths", type: "BETA", status: "Active" },
+  { name: "True Strike", type: "BETA", status: "Active" },
+];
+---
+
+<Layout title="Account - Musio Portal" description="Manage your Musio account.">
+  <!-- Top Navigation -->
+  <header class="border-b border-[#1a1a1a] bg-[#0a0a0a] sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <!-- Logo + Nav -->
+        <div class="flex items-center gap-8">
+          <a href="/">
+            <img src="/logo.png" alt="Musio" class="h-8" />
+          </a>
+          <nav class="hidden md:flex items-center gap-6">
+            <a href="/portal" class="text-white font-medium flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+              </svg>
+              ACCOUNT
+            </a>
+            <a href="/portal#marketplace" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+              </svg>
+              MARKETPLACE
+            </a>
+            <a href="/portal#download" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+              </svg>
+              DOWNLOAD
+            </a>
+            <a href="/portal#licenses" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
+              </svg>
+              ADD LICENSE
+            </a>
+          </nav>
+        </div>
+        
+        <!-- User Menu -->
+        <div class="flex items-center gap-4">
+          <span class="text-white font-medium hidden sm:block">{user.name}</span>
+          <button class="text-gray-400 hover:text-white transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-6 py-8">
+    <h1 class="text-3xl font-bold mb-8">Account</h1>
+    
+    <div class="flex flex-col md:flex-row gap-8">
+      <!-- Sidebar -->
+      <aside class="md:w-56 flex-shrink-0">
+        <nav class="space-y-2">
+          <button 
+            data-tab="profile"
+            class="tab-btn w-full text-left px-4 py-3 rounded-lg font-medium transition-colors bg-[#E94560] text-white"
+          >
+            Profile
+          </button>
+          <button 
+            data-tab="download"
+            class="tab-btn w-full text-left px-4 py-3 rounded-lg font-medium transition-colors bg-[#1a1a1a] text-gray-300 hover:bg-[#2a2a2a]"
+          >
+            Download Musio
+          </button>
+          <button 
+            data-tab="subscription"
+            class="tab-btn w-full text-left px-4 py-3 rounded-lg font-medium transition-colors bg-[#1a1a1a] text-gray-300 hover:bg-[#2a2a2a]"
+          >
+            Musio+
+          </button>
+          <button 
+            data-tab="licenses"
+            class="tab-btn w-full text-left px-4 py-3 rounded-lg font-medium transition-colors bg-[#1a1a1a] text-gray-300 hover:bg-[#2a2a2a]"
+          >
+            Licenses
+          </button>
+        </nav>
+      </aside>
+
+      <!-- Content Panels -->
+      <main class="flex-1">
+        <!-- Profile Panel -->
+        <div id="panel-profile" class="panel">
+          <div class="bg-[#141414] rounded-xl border border-[#1a1a1a] p-8">
+            <h2 class="text-2xl font-bold mb-2">Profile Information</h2>
+            <p class="text-gray-400 mb-8">Update Your Account Details</p>
+            
+            <div class="space-y-6">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between py-4 border-b border-[#1a1a1a]">
+                <div>
+                  <p class="text-gray-400 text-sm mb-1">Email</p>
+                  <p class="text-white">{user.email}</p>
+                </div>
+                <button class="mt-3 sm:mt-0 px-4 py-2 bg-[#2a2a2a] hover:bg-[#3a3a3a] text-white rounded-lg transition-colors">
+                  Change Email
+                </button>
+              </div>
+              
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between py-4 border-b border-[#1a1a1a]">
+                <div>
+                  <p class="text-gray-400 text-sm mb-1">Password</p>
+                  <p class="text-white">••••••••••</p>
+                </div>
+                <button class="mt-3 sm:mt-0 px-4 py-2 bg-[#2a2a2a] hover:bg-[#3a3a3a] text-white rounded-lg transition-colors">
+                  Change Password
+                </button>
+              </div>
+              
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between py-4">
+                <div>
+                  <p class="text-gray-400 text-sm mb-1">Display Name</p>
+                  <p class="text-white">{user.name}</p>
+                </div>
+                <button class="mt-3 sm:mt-0 px-4 py-2 bg-[#2a2a2a] hover:bg-[#3a3a3a] text-white rounded-lg transition-colors">
+                  Change Display Name
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Download Panel -->
+        <div id="panel-download" class="panel hidden">
+          <div class="bg-[#141414] rounded-xl border border-[#1a1a1a] p-8">
+            <h2 class="text-2xl font-bold mb-2">Download Musio</h2>
+            <p class="text-gray-400 mb-8">Get the latest plugin installer</p>
+            
+            <div class="bg-[#0a0a0a] rounded-lg p-6 mb-8 flex items-center justify-between">
+              <span class="text-white font-medium">Musio v1.48.0</span>
+              <span class="text-gray-400 text-sm">released 01/22/2026</span>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+              <!-- Windows -->
+              <div class="bg-[#0a0a0a] rounded-lg p-6 border border-[#1a1a1a]">
+                <div class="flex items-center gap-3 mb-6">
+                  <span class="text-2xl">🪟</span>
+                  <span class="text-xl font-semibold">Windows</span>
+                </div>
+                <ul class="space-y-3 mb-6 text-sm">
+                  <li class="flex items-center gap-2 text-gray-300">
+                    <svg class="w-4 h-4 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    Windows 10 or higher (64-bit)
+                  </li>
+                  <li class="flex items-center gap-2 text-gray-300">
+                    <svg class="w-4 h-4 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    Intel i5 / AMD Ryzen or better
+                  </li>
+                  <li class="flex items-center gap-2 text-gray-300">
+                    <svg class="w-4 h-4 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    8GB RAM (16GB recommended)
+                  </li>
+                  <li class="flex items-center gap-2 text-gray-300">
+                    <svg class="w-4 h-4 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    2GB free disk space
+                  </li>
+                </ul>
+                <button class="w-full bg-[#E94560] hover:bg-[#d63d56] text-white font-semibold py-3 rounded-lg transition-colors">
+                  Download For Windows
+                </button>
+              </div>
+              
+              <!-- macOS -->
+              <div class="bg-[#0a0a0a] rounded-lg p-6 border border-[#1a1a1a]">
+                <div class="flex items-center gap-3 mb-6">
+                  <span class="text-2xl">🍎</span>
+                  <span class="text-xl font-semibold">Apple</span>
+                </div>
+                <ul class="space-y-3 mb-6 text-sm">
+                  <li class="flex items-center gap-2 text-gray-300">
+                    <svg class="w-4 h-4 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    macOS 10.14 or higher
+                  </li>
+                  <li class="flex items-center gap-2 text-gray-300">
+                    <svg class="w-4 h-4 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    Intel / Apple Silicon processor
+                  </li>
+                  <li class="flex items-center gap-2 text-gray-300">
+                    <svg class="w-4 h-4 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    8GB RAM (16GB recommended)
+                  </li>
+                  <li class="flex items-center gap-2 text-gray-300">
+                    <svg class="w-4 h-4 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    2GB free disk space
+                  </li>
+                </ul>
+                <button class="w-full bg-[#E94560] hover:bg-[#d63d56] text-white font-semibold py-3 rounded-lg transition-colors">
+                  Download For macOS
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subscription Panel -->
+        <div id="panel-subscription" class="panel hidden">
+          <div class="bg-[#141414] rounded-xl border border-[#1a1a1a] p-8">
+            <h2 class="text-2xl font-bold mb-2">Musio+ Subscription</h2>
+            <p class="text-gray-400 mb-8">Manage your subscription</p>
+            
+            <div class="bg-gradient-to-r from-[#E94560]/20 to-transparent rounded-lg p-6 border border-[#E94560]/30 mb-6">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-[#E94560] font-semibold mb-1">Active Subscription</p>
+                  <p class="text-white text-xl font-bold">Musio+</p>
+                </div>
+                <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm font-medium">Active</span>
+              </div>
+            </div>
+            
+            <div class="space-y-4">
+              <div class="flex justify-between py-3 border-b border-[#1a1a1a]">
+                <span class="text-gray-400">Plan</span>
+                <span class="text-white">Monthly</span>
+              </div>
+              <div class="flex justify-between py-3 border-b border-[#1a1a1a]">
+                <span class="text-gray-400">Price</span>
+                <span class="text-white">$9/month</span>
+              </div>
+              <div class="flex justify-between py-3 border-b border-[#1a1a1a]">
+                <span class="text-gray-400">Next billing date</span>
+                <span class="text-white">February 15, 2026</span>
+              </div>
+            </div>
+            
+            <div class="mt-8 flex gap-4">
+              <button class="px-6 py-3 bg-[#E94560] hover:bg-[#d63d56] text-white font-semibold rounded-lg transition-colors">
+                Upgrade to Pro
+              </button>
+              <button class="px-6 py-3 bg-[#2a2a2a] hover:bg-[#3a3a3a] text-white rounded-lg transition-colors">
+                Manage Subscription
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Licenses Panel -->
+        <div id="panel-licenses" class="panel hidden">
+          <div class="bg-[#141414] rounded-xl border border-[#1a1a1a] p-8">
+            <div class="flex items-center justify-between mb-8">
+              <div>
+                <h2 class="text-2xl font-bold mb-2">Licenses</h2>
+                <p class="text-gray-400">Redeem and manage your product licenses</p>
+              </div>
+              <button class="px-6 py-3 bg-[#E94560] hover:bg-[#d63d56] text-white font-semibold rounded-lg transition-colors flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+                Add Licenses
+              </button>
+            </div>
+            
+            <div class="mb-6">
+              <h3 class="text-gray-400 text-sm mb-3">Timed Licenses</h3>
+              <p class="text-gray-500 text-sm">No timed licenses</p>
+            </div>
+            
+            <div>
+              <h3 class="text-gray-400 text-sm mb-3">Perpetual Licenses</h3>
+              <div class="bg-[#0a0a0a] rounded-lg overflow-hidden">
+                <table class="w-full">
+                  <tbody>
+                    {licenses.map((license, i) => (
+                      <tr class={`border-b border-[#1a1a1a] ${i === licenses.length - 1 ? 'border-b-0' : ''}`}>
+                        <td class="px-4 py-3 text-white">{license.name}</td>
+                        <td class="px-4 py-3 text-gray-400">{license.type}</td>
+                        <td class="px-4 py-3 text-right">
+                          <span class="text-green-400 flex items-center justify-end gap-1">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            {license.status}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Support Button -->
+  <div class="fixed bottom-6 left-6">
+    <button class="bg-[#E94560] hover:bg-[#d63d56] text-white px-5 py-3 rounded-full font-medium transition-colors flex items-center gap-2 shadow-lg">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      Support
+    </button>
+  </div>
+</Layout>
+
+<script>
+  // Tab switching
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.getAttribute('data-tab');
+      
+      // Update buttons
+      tabBtns.forEach(b => {
+        b.classList.remove('bg-[#E94560]', 'text-white');
+        b.classList.add('bg-[#1a1a1a]', 'text-gray-300');
+      });
+      btn.classList.remove('bg-[#1a1a1a]', 'text-gray-300');
+      btn.classList.add('bg-[#E94560]', 'text-white');
+      
+      // Update panels
+      panels.forEach(p => p.classList.add('hidden'));
+      document.getElementById(`panel-${tab}`).classList.remove('hidden');
+    });
+  });
+</script>
