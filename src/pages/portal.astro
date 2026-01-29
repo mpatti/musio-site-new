@@ -98,7 +98,7 @@ const licenses = [
             data-tab="subscription"
             class="tab-btn w-full text-left px-4 py-3 rounded-lg font-medium transition-colors bg-[#1a1a1a] text-gray-300 hover:bg-[#2a2a2a]"
           >
-            Musio+
+            Subscription
           </button>
           <button 
             data-tab="licenses"
@@ -240,44 +240,114 @@ const licenses = [
           </div>
         </div>
 
-        <!-- Subscription Panel -->
+<!-- Subscription Panel -->
         <div id="panel-subscription" class="panel hidden">
           <div class="bg-[#141414] rounded-xl border border-[#1a1a1a] p-8">
-            <h2 class="text-2xl font-bold mb-2">Musio+ Subscription</h2>
-            <p class="text-gray-400 mb-8">Manage your subscription</p>
-            
-            <div class="bg-gradient-to-r from-[#E94560]/20 to-transparent rounded-lg p-6 border border-[#E94560]/30 mb-6">
-              <div class="flex items-center justify-between">
-                <div>
-                  <p class="text-[#E94560] font-semibold mb-1">Active Subscription</p>
-                  <p class="text-white text-xl font-bold">Musio+</p>
+            <h2 class="text-2xl font-bold mb-2">Subscription</h2>
+            <p class="text-gray-400 mb-8">Choose the plan that's right for you</p>
+
+            <!-- Plan Cards -->
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+              <!-- Musio - Current Plan -->
+              <div class="bg-[#0a0a0a] rounded-xl p-6 border-2 border-[#E94560] relative">
+                <div class="absolute -top-3 left-4">
+                  <span class="bg-[#E94560] text-white text-xs font-semibold px-3 py-1 rounded-full">Current Plan</span>
                 </div>
-                <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm font-medium">Active</span>
+                <h3 class="text-xl font-bold text-white mt-2 mb-1">Musio</h3>
+                <p class="text-gray-400 text-sm mb-4">2,300 essential instruments</p>
+                <div class="mb-4">
+                  <span class="text-3xl font-bold text-white">$9</span>
+                  <span class="text-gray-400">/month</span>
+                </div>
+                <p class="text-gray-500 text-sm mb-4">or $79/year (save 27%)</p>
+                <ul class="space-y-2 text-sm text-gray-300">
+                  <li class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    Curated sound palette
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    Great starting point
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    Cancel anytime
+                  </li>
+                </ul>
+              </div>
+              
+              <!-- Musio Pro -->
+              <div class="bg-[#0a0a0a] rounded-xl p-6 border border-[#2a2a2a] relative">
+                <div class="absolute -top-3 left-4">
+                  <span class="bg-[#E94560]/20 text-[#E94560] text-xs font-semibold px-3 py-1 rounded-full">Best Value</span>
+                </div>
+                <h3 class="text-xl font-bold text-white mt-2 mb-1">Musio Pro</h3>
+                <p class="text-gray-400 text-sm mb-4">Unlimited access to everything</p>
+                <div class="mb-4">
+                  <span class="text-3xl font-bold text-white">$19</span>
+                  <span class="text-gray-400">/month</span>
+                </div>
+                <p class="text-[#E94560] text-sm mb-4">or $149/year — Launch Price (save 35%)</p>
+                <ul class="space-y-2 text-sm text-gray-300 mb-6">
+                  <li class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <strong class="text-white">Everything</strong> in Musio
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    Every developer, every library
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-[#E94560]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    New instruments added regularly
+                  </li>
+                </ul>
+                <button class="w-full bg-[#E94560] hover:bg-[#d63d56] text-white font-semibold py-3 rounded-lg transition-colors">
+                  Upgrade to Pro
+                </button>
               </div>
             </div>
-            
-            <div class="space-y-4">
-              <div class="flex justify-between py-3 border-b border-[#1a1a1a]">
-                <span class="text-gray-400">Plan</span>
-                <span class="text-white">Monthly</span>
+
+            <!-- Current Billing Info -->
+            <div class="bg-[#0a0a0a] rounded-lg p-6 border border-[#1a1a1a]">
+              <h3 class="text-white font-semibold mb-4">Billing Details</h3>
+              <div class="space-y-3">
+                <div class="flex justify-between py-2 border-b border-[#1a1a1a]">
+                  <span class="text-gray-400">Current plan</span>
+                  <span class="text-white">Musio (Monthly)</span>
+                </div>
+                <div class="flex justify-between py-2 border-b border-[#1a1a1a]">
+                  <span class="text-gray-400">Amount</span>
+                  <span class="text-white">$9/month</span>
+                </div>
+                <div class="flex justify-between py-2">
+                  <span class="text-gray-400">Next billing date</span>
+                  <span class="text-white">February 15, 2026</span>
+                </div>
               </div>
-              <div class="flex justify-between py-3 border-b border-[#1a1a1a]">
-                <span class="text-gray-400">Price</span>
-                <span class="text-white">$9/month</span>
+              <div class="mt-6 flex gap-4">
+                <button class="px-5 py-2.5 bg-[#2a2a2a] hover:bg-[#3a3a3a] text-white rounded-lg transition-colors text-sm">
+                  Switch to Annual
+                </button>
+                <button class="px-5 py-2.5 bg-[#2a2a2a] hover:bg-[#3a3a3a] text-white rounded-lg transition-colors text-sm">
+                  Update Payment Method
+                </button>
+                <button class="px-5 py-2.5 text-gray-400 hover:text-white rounded-lg transition-colors text-sm">
+                  Cancel Subscription
+                </button>
               </div>
-              <div class="flex justify-between py-3 border-b border-[#1a1a1a]">
-                <span class="text-gray-400">Next billing date</span>
-                <span class="text-white">February 15, 2026</span>
-              </div>
-            </div>
-            
-            <div class="mt-8 flex gap-4">
-              <button class="px-6 py-3 bg-[#E94560] hover:bg-[#d63d56] text-white font-semibold rounded-lg transition-colors">
-                Upgrade to Pro
-              </button>
-              <button class="px-6 py-3 bg-[#2a2a2a] hover:bg-[#3a3a3a] text-white rounded-lg transition-colors">
-                Manage Subscription
-              </button>
             </div>
           </div>
         </div>
