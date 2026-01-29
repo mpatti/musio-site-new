@@ -1,0 +1,238 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Mock data for demo
+const user = { name: "Mike Patti" };
+
+const categories = [
+  "Strings", "Brass", "Percussion", "Woodwinds", "Guitars", 
+  "Keyboards", "Synthesizers", "Choir", "World", "Sound Design"
+];
+
+const developers = ["Cinesamples", "Soundiron", "AudioOllie", "ProjectSAM"];
+
+const products = [
+  {
+    name: "Apocalypse Percussion",
+    description: "Flagship epic drums, cinematic percussion",
+    price: 199.00,
+    image: "https://assets.mus.io/ff2b6e950ff58c595a2d9291805cf3ac29ab1200ba84ee545a09b5fa8584ff6e.png"
+  },
+  {
+    name: "Apocalyptica - Dark Cello",
+    description: "Dark Solo Cellos",
+    price: 59.00,
+    image: "https://assets.mus.io/0c16c49a0c870ab6e7ecfd338b2fd718d9e897c59aa261f9460c8879eb8c7584.png"
+  },
+  {
+    name: "Gina Luciani - Cinema Flutes",
+    description: "Elegant Modern Flutes",
+    price: 99.00,
+    image: "https://assets.mus.io/6dd3f6be31e3e3eb08fd1cfd2133f3248300901f1b67b9704b4b3698d4950898.png"
+  },
+  {
+    name: "Randy Kerber - Celeste",
+    description: "Magical Keyboard",
+    price: 49.00,
+    image: "https://assets.mus.io/90a41f2cb73ed06ec2a1e58c2521296e4b94da40a95efe8640520f5eca819bc1.png"
+  },
+  {
+    name: "Randy Kerber - Prepared Piano",
+    description: "Prepared Piano FX",
+    price: 29.00,
+    image: "https://assets.mus.io/db563a22e50153920d3303ca6c9148a6a6804aa8dd97622bf1c391338171460e.png"
+  },
+  {
+    name: "Taylor Davis - Violin",
+    description: "Solo Violin",
+    price: 79.00,
+    image: "https://assets.mus.io/57cb3bdc79b5e97eaba327e131e635d15fb9f48618412c206afaf05734fff9d7.png"
+  },
+  {
+    name: "Tina Guo - Acoustic Cello",
+    description: "Seamless Legato Cello",
+    price: 59.00,
+    image: "https://assets.mus.io/ae9bf6ee368a5b7fac3cbf50d2edd7797dbf2347f26a23c1ffa70c616f307b54.png"
+  },
+  {
+    name: "Tina Guo - Electric Cello",
+    description: "Raw Distorted Cello",
+    price: 59.00,
+    image: "https://assets.mus.io/77fc2e0cb0001bf38a46bae8cba79049ab267bf715ce80a575ca14fd0fc209f3.png"
+  },
+  {
+    name: "Hyperion Strings Core",
+    description: "Essential orchestral strings",
+    price: 149.00,
+    image: "https://assets.mus.io/7688fa4cf4e290d122ef0f96a206ae913c6117961b4f7fd21a5f6b7af266e0e8.png"
+  },
+  {
+    name: "Hyperion Brass Core",
+    description: "Essential orchestral brass",
+    price: 149.00,
+    image: "https://assets.mus.io/cc3a3c9d5622f83c67f1d71294af15a88709bf26bf870c6268da4bdf481eae68.png"
+  },
+  {
+    name: "Scoring Synths",
+    description: "Cinematic synthesizers",
+    price: 79.00,
+    image: "https://assets.mus.io/5f64209e734559beeec5f6eb6a300a532f101a971748449d32b6e1b9104d24c1.png"
+  },
+  {
+    name: "True Strike",
+    description: "Orchestral percussion",
+    price: 199.00,
+    image: "https://assets.mus.io/c7f2b6686c0a2258f95a6b2cd5611e2c9de99def788f8f25f9e88718595993ce.png"
+  },
+];
+---
+
+<Layout title="Marketplace - Musio" description="Browse and purchase virtual instruments.">
+  <!-- Top Navigation -->
+  <header class="border-b border-[#1a1a1a] bg-[#0a0a0a] sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <!-- Logo + Nav -->
+        <div class="flex items-center gap-8">
+          <a href="/">
+            <img src="/logo.png" alt="Musio" class="h-8" />
+          </a>
+          <nav class="hidden md:flex items-center gap-6">
+            <a href="/portal" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+              </svg>
+              ACCOUNT
+            </a>
+            <a href="/marketplace" class="text-white font-medium flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+              </svg>
+              MARKETPLACE
+            </a>
+            <a href="/portal#download" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+              </svg>
+              DOWNLOAD
+            </a>
+            <a href="/portal#licenses" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
+              </svg>
+              ADD LICENSE
+            </a>
+          </nav>
+        </div>
+        
+        <!-- User Menu -->
+        <div class="flex items-center gap-4">
+          <span class="text-white font-medium hidden sm:block">{user.name}</span>
+          <button class="text-gray-400 hover:text-white transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-6 py-8">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-8">
+      <h1 class="text-3xl font-bold">Marketplace</h1>
+      <button class="bg-[#E94560] hover:bg-[#d63d56] text-white px-5 py-2.5 rounded-lg font-medium transition-colors flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+        </svg>
+        Cart: 0 item(s)
+      </button>
+    </div>
+    
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Sidebar -->
+      <aside class="lg:w-56 flex-shrink-0">
+        <!-- Categories -->
+        <div class="mb-8">
+          <h3 class="text-white font-semibold mb-4">Categories</h3>
+          <nav class="space-y-1">
+            {categories.map((cat, i) => (
+              <button class={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${i === 2 ? 'bg-[#E94560] text-white' : 'bg-[#1a1a1a] text-gray-300 hover:bg-[#2a2a2a]'}`}>
+                {cat}
+              </button>
+            ))}
+          </nav>
+        </div>
+        
+        <!-- Developers -->
+        <div>
+          <h3 class="text-white font-semibold mb-4">Developer</h3>
+          <nav class="space-y-1">
+            {developers.map((dev) => (
+              <button class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors bg-[#1a1a1a] text-gray-300 hover:bg-[#2a2a2a]">
+                {dev}
+              </button>
+            ))}
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Products Grid -->
+      <main class="flex-1">
+        <!-- Search -->
+        <div class="mb-6">
+          <div class="relative">
+            <input 
+              type="text" 
+              placeholder="Search"
+              class="w-full px-4 py-3 bg-[#141414] border border-[#2a2a2a] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#E94560] transition-colors pr-12"
+            />
+            <svg class="w-5 h-5 text-gray-500 absolute right-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {products.map((product) => (
+            <div class="bg-[#141414] rounded-xl border border-[#1a1a1a] overflow-hidden hover:border-[#2a2a2a] transition-colors group">
+              <div class="aspect-square overflow-hidden">
+                <img 
+                  src={product.image} 
+                  alt={product.name}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div class="p-4">
+                <h4 class="text-white font-semibold mb-1 truncate">{product.name}</h4>
+                <p class="text-gray-400 text-sm mb-3 truncate">{product.description}</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-white font-bold">${product.price.toFixed(2)}</span>
+                  <button class="bg-[#E94560] hover:bg-[#d63d56] text-white text-sm px-3 py-1.5 rounded-lg font-medium transition-colors flex items-center gap-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                    Add To Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Support Button -->
+  <div class="fixed bottom-6 left-6">
+    <button class="bg-[#E94560] hover:bg-[#d63d56] text-white px-5 py-3 rounded-full font-medium transition-colors flex items-center gap-2 shadow-lg">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      Support
+    </button>
+  </div>
+</Layout>
