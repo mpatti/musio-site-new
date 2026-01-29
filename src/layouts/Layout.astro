@@ -60,10 +60,10 @@ const {
       }
       initPaddle();
       
-      // Musio price IDs (replace with actual IDs)
+      // Musio price IDs
       const musioPrices = {
-        monthly: 'MUSIO_MONTHLY_PRICE_ID',
-        annual: 'MUSIO_ANNUAL_PRICE_ID'
+        monthly: 'pri_01j5y44b59d521nxd1bmw96z7n',
+        annual: 'pri_01j5y43j6cvhvd5qq6e913p55z'
       };
       
       // Musio Pro price IDs
@@ -75,17 +75,11 @@ const {
       window.openMusio = function() {
         if (typeof Paddle !== 'undefined') {
           const period = window.getMusioPeriod ? window.getMusioPeriod() : 'monthly';
-          const priceId = musioPrices[period];
-          if (priceId.includes('PRICE_ID')) {
-            // Fallback to portal if price IDs not set
-            window.location.href = 'https://portal.musio.com/account/musio-plus';
-            return;
-          }
           Paddle.Checkout.open({
-            items: [{ priceId: priceId, quantity: 1 }]
+            items: [{ priceId: musioPrices[period], quantity: 1 }]
           });
         } else {
-          window.location.href = 'https://portal.musio.com/account/musio-plus';
+          console.error('Paddle not loaded');
         }
       };
       
