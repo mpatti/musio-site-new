@@ -108,8 +108,9 @@ export async function getMarketplaceProducts(): Promise<MarketplaceProduct[]> {
   const marketplaceProducts: MarketplaceProduct[] = [];
 
   for (const product of products) {
-    // Skip subscription products (like Musio Pro which has tax_category: 'saas')
-    if (product.name === 'Musio Pro' || product.name === 'Musio') continue;
+    // Skip subscription products and specific excluded products
+    const excludedProducts = ['Musio Pro', 'Musio', 'Musio 1', 'Musio+', 'Piano in Blue'];
+    if (excludedProducts.includes(product.name)) continue;
     
     // Skip products without images
     if (!product.image_url) continue;
