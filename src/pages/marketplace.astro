@@ -116,6 +116,24 @@ const categories = [
 
   <!-- Main Content -->
   <div class="max-w-7xl mx-auto px-6 py-8">
+    <!-- Musio Pro Banner -->
+    <div class="mb-8 bg-gradient-to-r from-[#E94560]/20 via-[#E94560]/10 to-transparent border border-[#E94560]/30 rounded-xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 bg-[#E94560]/20 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-[#E94560]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+          </svg>
+        </div>
+        <div>
+          <p class="text-white font-semibold">Get every library with Musio Pro</p>
+          <p class="text-gray-400 text-sm">All 50+ libraries, 3,400+ instruments for one monthly price</p>
+        </div>
+      </div>
+      <a href="/#pricing" class="bg-[#E94560] hover:bg-[#d63d56] text-white px-6 py-2.5 rounded-lg font-medium transition-colors whitespace-nowrap">
+        $19.99/mo — Learn More
+      </a>
+    </div>
+
     <!-- Header -->
     <div class="flex items-center justify-between mb-8">
       <h1 class="text-3xl font-bold">Marketplace</h1>
@@ -146,6 +164,21 @@ const categories = [
             <button id="clear-cart-btn" class="w-full bg-transparent border border-[#2a2a2a] hover:bg-[#1a1a1a] text-gray-400 py-2 rounded-lg text-sm transition-colors">
               Clear Cart
             </button>
+          </div>
+          <!-- Pro Comparison -->
+          <div id="pro-comparison" class="hidden p-4 bg-gradient-to-r from-[#E94560]/10 to-transparent border-t border-[#E94560]/30">
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-[#E94560] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+              <div class="flex-1">
+                <p class="text-white text-sm font-medium">Or get <span class="text-[#E94560]">everything</span> with Pro</p>
+                <p class="text-gray-400 text-xs mt-1">All 50+ libraries for just $19.99/mo</p>
+                <a href="/#pricing" class="inline-block mt-2 text-[#E94560] text-xs font-medium hover:underline">
+                  Learn about Musio Pro →
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -292,6 +325,7 @@ const categories = [
       const cartTotal = document.getElementById('cart-total');
       const checkoutBtn = document.getElementById('checkout-btn');
       const clearCartBtn = document.getElementById('clear-cart-btn');
+      const proComparison = document.getElementById('pro-comparison');
       
       let currentCategory = 'All';
       let currentDeveloper = 'All';
@@ -311,6 +345,7 @@ const categories = [
           cartItemsContainer.innerHTML = '<p class="text-gray-500 text-sm text-center py-4">Your cart is empty</p>';
           cartTotal.textContent = '$0.00';
           checkoutBtn.disabled = true;
+          proComparison.classList.add('hidden');
         } else {
           let total = 0;
           cartItemsContainer.innerHTML = cart.map((item, index) => {
@@ -332,6 +367,7 @@ const categories = [
           }).join('');
           cartTotal.textContent = '$' + total.toFixed(2);
           checkoutBtn.disabled = false;
+          proComparison.classList.remove('hidden');
 
           // Add remove handlers
           document.querySelectorAll('.remove-item').forEach(btn => {
