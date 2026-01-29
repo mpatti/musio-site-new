@@ -431,11 +431,18 @@ const developers = [
         <div class="bg-[#141414] border border-[#2a2a2a] rounded-2xl p-8 hover:border-[#3a3a3a] transition-colors duration-200 flex flex-col">
           <div class="mb-6">
             <h3 class="text-xl font-semibold text-white mb-2">Musio</h3>
-            <div class="flex items-baseline gap-2">
-              <span class="text-4xl font-bold">$9</span>
-              <span class="text-gray-300">/month</span>
+            
+            <!-- Billing Toggle -->
+            <div class="flex bg-[#0a0a0a] rounded-lg p-1 mb-4">
+              <button class="musio-toggle flex-1 py-2 px-3 text-sm font-medium rounded-md transition-colors bg-[#2a2a2a] text-white" data-plan="musio" data-period="monthly">Monthly</button>
+              <button class="musio-toggle flex-1 py-2 px-3 text-sm font-medium rounded-md transition-colors text-gray-400" data-plan="musio" data-period="annual">Annual</button>
             </div>
-            <p class="text-gray-400 mt-1">or $79/year <span class="text-[#E94560]">(save 27%)</span></p>
+            
+            <div class="flex items-baseline gap-2">
+              <span id="musio-price" class="text-4xl font-bold">$9</span>
+              <span id="musio-period" class="text-gray-300">/month</span>
+            </div>
+            <p id="musio-savings" class="text-[#E94560] text-sm mt-1 h-5"></p>
           </div>
           
           <ul class="space-y-4 mb-8 flex-grow">
@@ -465,12 +472,13 @@ const developers = [
             </li>
           </ul>
           
-          <a 
-href="https://portal.musio.com/account/musio-plus"
-            class="block w-full text-center bg-[#2a2a2a] hover:bg-[#3a3a3a] text-white font-semibold py-3 rounded-lg transition-colors duration-200"
+          <button 
+            id="musio-cta"
+            onclick="openMusio()"
+            class="block w-full text-center bg-[#2a2a2a] hover:bg-[#3a3a3a] text-white font-semibold py-3 rounded-lg transition-colors duration-200 cursor-pointer"
           >
             Get Musio
-          </a>
+          </button>
         </div>
         
         <!-- Musio Pro (Best Value) -->
@@ -484,11 +492,18 @@ href="https://portal.musio.com/account/musio-plus"
           
           <div class="mb-6">
             <h3 class="text-xl font-semibold text-[#E94560] mb-2">Musio Pro</h3>
-            <div class="flex items-baseline gap-2">
-              <span class="text-4xl font-bold">$19</span>
-              <span class="text-gray-300">/mo</span>
+            
+            <!-- Billing Toggle -->
+            <div class="flex bg-[#0a0a0a] rounded-lg p-1 mb-4">
+              <button class="pro-toggle flex-1 py-2 px-3 text-sm font-medium rounded-md transition-colors text-gray-400" data-plan="pro" data-period="monthly">Monthly</button>
+              <button class="pro-toggle flex-1 py-2 px-3 text-sm font-medium rounded-md transition-colors bg-[#E94560] text-white" data-plan="pro" data-period="annual">Annual</button>
             </div>
-            <p class="text-gray-400 mt-1">or <span class="text-white font-semibold">$149/year</span> <span class="text-[#E94560]">— Launch Price (save 35%)</span></p>
+            
+            <div class="flex items-baseline gap-2">
+              <span id="pro-price" class="text-4xl font-bold">$149</span>
+              <span id="pro-period" class="text-gray-300">/year</span>
+            </div>
+            <p id="pro-savings" class="text-[#E94560] text-sm mt-1 h-5">Launch price — save 35%</p>
           </div>
           
           <ul class="space-y-4 mb-8 flex-grow">
@@ -518,7 +533,8 @@ href="https://portal.musio.com/account/musio-plus"
             </li>
           </ul>
           
-<button
+          <button
+            id="pro-cta"
             onclick="openMusioPro()"
             class="block w-full text-center bg-[#E94560] hover:bg-[#d63d56] text-white font-semibold py-3 rounded-lg transition-all duration-200 hover:scale-[1.02] cursor-pointer"
           >
@@ -856,4 +872,74 @@ href="https://portal.musio.com/account/musio-plus"
   }
   
   setInterval(cycleWord, 1800);
+  
+  // Pricing toggle functionality
+  let musioPeriod = 'monthly';
+  let proPeriod = 'annual';
+  
+  // Musio toggle
+  document.querySelectorAll('.musio-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const period = btn.dataset.period;
+      musioPeriod = period;
+      
+      // Update toggle buttons
+      document.querySelectorAll('.musio-toggle').forEach(b => {
+        b.classList.remove('bg-[#2a2a2a]', 'text-white');
+        b.classList.add('text-gray-400');
+      });
+      btn.classList.remove('text-gray-400');
+      btn.classList.add('bg-[#2a2a2a]', 'text-white');
+      
+      // Update price display
+      const priceEl = document.getElementById('musio-price');
+      const periodEl = document.getElementById('musio-period');
+      const savingsEl = document.getElementById('musio-savings');
+      
+      if (period === 'monthly') {
+        priceEl.textContent = '$9';
+        periodEl.textContent = '/month';
+        savingsEl.textContent = '';
+      } else {
+        priceEl.textContent = '$79';
+        periodEl.textContent = '/year';
+        savingsEl.textContent = 'Save 27%';
+      }
+    });
+  });
+  
+  // Pro toggle
+  document.querySelectorAll('.pro-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const period = btn.dataset.period;
+      proPeriod = period;
+      
+      // Update toggle buttons
+      document.querySelectorAll('.pro-toggle').forEach(b => {
+        b.classList.remove('bg-[#E94560]', 'text-white');
+        b.classList.add('text-gray-400');
+      });
+      btn.classList.remove('text-gray-400');
+      btn.classList.add('bg-[#E94560]', 'text-white');
+      
+      // Update price display
+      const priceEl = document.getElementById('pro-price');
+      const periodEl = document.getElementById('pro-period');
+      const savingsEl = document.getElementById('pro-savings');
+      
+      if (period === 'monthly') {
+        priceEl.textContent = '$19';
+        periodEl.textContent = '/month';
+        savingsEl.textContent = '';
+      } else {
+        priceEl.textContent = '$149';
+        periodEl.textContent = '/year';
+        savingsEl.textContent = 'Launch price — save 35%';
+      }
+    });
+  });
+  
+  // Expose period state to window for Paddle functions
+  window.getMusioPeriod = () => musioPeriod;
+  window.getProPeriod = () => proPeriod;
 </script>
