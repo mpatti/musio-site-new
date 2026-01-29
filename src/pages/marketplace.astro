@@ -37,10 +37,8 @@ function inferDeveloper(name: string): string {
   // Soundiron products (only these specific ones)
   if (lowerName.includes('hyperion') || lowerName.includes('emotional piano') || lowerName.includes('apocalypse')) return 'Soundiron';
   
-  // AudioOllie products
-  if (lowerName.includes('scoring synth') || lowerName.includes('scoring string') || lowerName.includes('nashville') || 
-      lowerName.includes('studio guitar') || lowerName.includes('studio bass') || lowerName.includes('la modern') ||
-      lowerName.includes('collision') || lowerName.includes('industry')) return 'AudioOllie';
+  // AudioOllie products (only these specific ones)
+  if (lowerName.includes('scoring synth') || lowerName.includes('nashville') || lowerName.includes('la modern')) return 'AudioOllie';
   
   // ProjectSAM products
   if (lowerName.includes('true strike') || lowerName.includes('orchestral') || lowerName.includes('swing') ||
