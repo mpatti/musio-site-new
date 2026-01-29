@@ -1,87 +1,175 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const instrumentImages = [
+  "https://assets.mus.io/ff2b6e950ff58c595a2d9291805cf3ac29ab1200ba84ee545a09b5fa8584ff6e.png",
+  "https://assets.mus.io/0c16c49a0c870ab6e7ecfd338b2fd718d9e897c59aa261f9460c8879eb8c7584.png",
+  "https://assets.mus.io/6dd3f6be31e3e3eb08fd1cfd2133f3248300901f1b67b9704b4b3698d4950898.png",
+  "https://assets.mus.io/90a41f2cb73ed06ec2a1e58c2521296e4b94da40a95efe8640520f5eca819bc1.png",
+  "https://assets.mus.io/db563a22e50153920d3303ca6c9148a6a6804aa8dd97622bf1c391338171460e.png",
+  "https://assets.mus.io/57cb3bdc79b5e97eaba327e131e635d15fb9f48618412c206afaf05734fff9d7.png",
+  "https://assets.mus.io/ae9bf6ee368a5b7fac3cbf50d2edd7797dbf2347f26a23c1ffa70c616f307b54.png",
+  "https://assets.mus.io/77fc2e0cb0001bf38a46bae8cba79049ab267bf715ce80a575ca14fd0fc209f3.png",
+  "https://assets.mus.io/7688fa4cf4e290d122ef0f96a206ae913c6117961b4f7fd21a5f6b7af266e0e8.png",
+  "https://assets.mus.io/cc3a3c9d5622f83c67f1d71294af15a88709bf26bf870c6268da4bdf481eae68.png",
+  "https://assets.mus.io/5f64209e734559beeec5f6eb6a300a532f101a971748449d32b6e1b9104d24c1.png",
+  "https://assets.mus.io/c7f2b6686c0a2258f95a6b2cd5611e2c9de99def788f8f25f9e88718595993ce.png",
+  "https://assets.mus.io/54a7970f42264e090ba8d040f7572bf5451c71c8e40fd3e4cf1c17fbdab7b16d.png",
+  "https://assets.mus.io/91eb22dd09987567f022bd5d20ddeb30fe0acf6663710fac40ff5d6d4bf02b4d.png",
+  "https://assets.mus.io/ad93c98d63c5ed3248fce564d7e8eb56c0eec9650c362d45b336f283a53c4b65.png",
+  "https://assets.mus.io/54bd0cd6e5ef253d60f49a6546ba706bb6dea43b4985fd38d4288f781f28e33b.png",
+];
 ---
 
 <Layout title="Sign Up - Musio" description="Create your Musio account and start making music.">
-  <div class="min-h-screen flex items-center justify-center px-6 py-12">
-    <div class="w-full max-w-md">
-      <!-- Logo -->
-      <div class="text-center mb-10">
-        <a href="/">
-          <img 
-            src="/logo.png" 
-            alt="Musio" 
-            class="h-12 mx-auto mb-6"
-          />
-        </a>
-        <h1 class="text-3xl font-bold mb-2">Create your account</h1>
-        <p class="text-gray-400">Start making music with Musio</p>
+  <div class="min-h-screen flex">
+    <!-- Left Side - Instrument Grid -->
+    <div class="hidden lg:block lg:w-1/2 relative overflow-hidden">
+      <div class="absolute inset-0 grid-background">
+        <div class="image-grid">
+          {instrumentImages.map((src, i) => (
+            <div class="grid-item">
+              <img 
+                src={src} 
+                alt="" 
+                loading={i < 8 ? "eager" : "lazy"}
+                decoding="async"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          ))}
+        </div>
       </div>
+      <!-- Gradient Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#0a0a0a]"></div>
+      <div class="absolute inset-0 bg-[#0a0a0a]/30"></div>
+      
+      <!-- Branding on left side -->
+      <div class="absolute bottom-12 left-12 z-10">
+        <img src="/logo.png" alt="Musio" class="h-10 mb-4" />
+        <p class="text-white text-xl font-medium">One plugin. Every instrument.</p>
+        <p class="text-gray-400">World-class libraries from the developers you trust.</p>
+      </div>
+    </div>
 
-      <!-- Signup Form -->
-      <form class="space-y-5">
-        <!-- Name -->
-        <div>
-          <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Full name</label>
-          <input 
-            type="text" 
-            id="name" 
-            name="name"
-            required
-            class="w-full px-4 py-3 bg-[#141414] border border-[#2a2a2a] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#E94560] focus:ring-1 focus:ring-[#E94560] transition-colors"
-            placeholder="Your name"
-          />
+    <!-- Right Side - Form -->
+    <div class="w-full lg:w-1/2 flex items-center justify-center px-6 py-12">
+      <div class="w-full max-w-md">
+        <!-- Logo (mobile only) -->
+        <div class="text-center mb-10 lg:hidden">
+          <a href="/">
+            <img 
+              src="/logo.png" 
+              alt="Musio" 
+              class="h-12 mx-auto mb-6"
+            />
+          </a>
+        </div>
+        
+        <!-- Heading -->
+        <div class="mb-10">
+          <h1 class="text-3xl font-bold mb-2">Create your account</h1>
+          <p class="text-gray-400">Start making music with Musio</p>
         </div>
 
-        <!-- Email -->
-        <div>
-          <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email address</label>
-          <input 
-            type="email" 
-            id="email" 
-            name="email"
-            required
-            class="w-full px-4 py-3 bg-[#141414] border border-[#2a2a2a] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#E94560] focus:ring-1 focus:ring-[#E94560] transition-colors"
-            placeholder="you@example.com"
-          />
-        </div>
+        <!-- Signup Form -->
+        <form class="space-y-5">
+          <!-- Name -->
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Full name</label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name"
+              required
+              class="w-full px-4 py-3 bg-[#141414] border border-[#2a2a2a] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#E94560] focus:ring-1 focus:ring-[#E94560] transition-colors"
+              placeholder="Your name"
+            />
+          </div>
 
-        <!-- Password -->
-        <div>
-          <label for="password" class="block text-sm font-medium text-gray-300 mb-2">Password</label>
-          <input 
-            type="password" 
-            id="password" 
-            name="password"
-            required
-            minlength="8"
-            class="w-full px-4 py-3 bg-[#141414] border border-[#2a2a2a] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#E94560] focus:ring-1 focus:ring-[#E94560] transition-colors"
-            placeholder="At least 8 characters"
-          />
-        </div>
+          <!-- Email -->
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email address</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email"
+              required
+              class="w-full px-4 py-3 bg-[#141414] border border-[#2a2a2a] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#E94560] focus:ring-1 focus:ring-[#E94560] transition-colors"
+              placeholder="you@example.com"
+            />
+          </div>
 
-        <!-- Submit Button -->
-        <button 
-          type="submit"
-          class="w-full bg-[#E94560] hover:bg-[#d63d56] text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 hover:scale-[1.02] mt-6"
-        >
-          Create account
-        </button>
-      </form>
+          <!-- Password -->
+          <div>
+            <label for="password" class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password"
+              required
+              minlength="8"
+              class="w-full px-4 py-3 bg-[#141414] border border-[#2a2a2a] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#E94560] focus:ring-1 focus:ring-[#E94560] transition-colors"
+              placeholder="At least 8 characters"
+            />
+          </div>
 
-      <!-- Login Link -->
-      <p class="text-center text-gray-400 mt-8">
-        Already have an account? 
-        <a href="/login" class="text-[#E94560] hover:underline font-medium">Sign in</a>
-      </p>
+          <!-- Submit Button -->
+          <button 
+            type="submit"
+            class="w-full bg-[#E94560] hover:bg-[#d63d56] text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 hover:scale-[1.02] mt-6"
+          >
+            Create account
+          </button>
+        </form>
 
-      <!-- Terms -->
-      <p class="text-center text-gray-500 text-xs mt-6">
-        By creating an account, you agree to our 
-        <a href="/terms" class="text-gray-400 hover:underline">Terms of Service</a> 
-        and 
-        <a href="/privacy" class="text-gray-400 hover:underline">Privacy Policy</a>
-      </p>
+        <!-- Login Link -->
+        <p class="text-center text-gray-400 mt-8">
+          Already have an account? 
+          <a href="/login" class="text-[#E94560] hover:underline font-medium">Sign in</a>
+        </p>
+
+        <!-- Terms -->
+        <p class="text-center text-gray-500 text-xs mt-6">
+          By creating an account, you agree to our 
+          <a href="/terms" class="text-gray-400 hover:underline">Terms of Service</a> 
+          and 
+          <a href="/privacy" class="text-gray-400 hover:underline">Privacy Policy</a>
+        </p>
+      </div>
     </div>
   </div>
 </Layout>
+
+<style>
+  .grid-background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 120px);
+    grid-auto-rows: 120px;
+    gap: 4px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(2);
+  }
+  
+  .grid-item {
+    overflow: hidden;
+    filter: brightness(0.9);
+    width: 100%;
+    height: 100%;
+    background: #1a1a1a;
+  }
+  
+  .grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
