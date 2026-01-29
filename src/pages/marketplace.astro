@@ -40,9 +40,8 @@ function inferDeveloper(name: string): string {
   // AudioOllie products (only these specific ones)
   if (lowerName.includes('scoring synth') || lowerName.includes('nashville') || lowerName.includes('la modern')) return 'AudioOllie';
   
-  // ProjectSAM products
-  if (lowerName.includes('true strike') || lowerName.includes('orchestral') || lowerName.includes('swing') ||
-      lowerName.includes('lumina')) return 'ProjectSAM';
+  // ProjectSAM products (only True Strike)
+  if (lowerName.includes('true strike')) return 'ProjectSAM';
   
   // Default to Cinesamples for unmatched (most products are Cinesamples)
   return 'Cinesamples';
