@@ -1,0 +1,99 @@
+---
+// Utility page to generate a screenshot of instrument grid
+const instrumentImages = [
+  "https://assets.mus.io/ff2b6e950ff58c595a2d9291805cf3ac29ab1200ba84ee545a09b5fa8584ff6e.png",
+  "https://assets.mus.io/0c16c49a0c870ab6e7ecfd338b2fd718d9e897c59aa261f9460c8879eb8c7584.png",
+  "https://assets.mus.io/6dd3f6be31e3e3eb08fd1cfd2133f3248300901f1b67b9704b4b3698d4950898.png",
+  "https://assets.mus.io/90a41f2cb73ed06ec2a1e58c2521296e4b94da40a95efe8640520f5eca819bc1.png",
+  "https://assets.mus.io/db563a22e50153920d3303ca6c9148a6a6804aa8dd97622bf1c391338171460e.png",
+  "https://assets.mus.io/57cb3bdc79b5e97eaba327e131e635d15fb9f48618412c206afaf05734fff9d7.png",
+  "https://assets.mus.io/ae9bf6ee368a5b7fac3cbf50d2edd7797dbf2347f26a23c1ffa70c616f307b54.png",
+  "https://assets.mus.io/77fc2e0cb0001bf38a46bae8cba79049ab267bf715ce80a575ca14fd0fc209f3.png",
+  "https://assets.mus.io/7688fa4cf4e290d122ef0f96a206ae913c6117961b4f7fd21a5f6b7af266e0e8.png",
+  "https://assets.mus.io/cc3a3c9d5622f83c67f1d71294af15a88709bf26bf870c6268da4bdf481eae68.png",
+  "https://assets.mus.io/5f64209e734559beeec5f6eb6a300a532f101a971748449d32b6e1b9104d24c1.png",
+  "https://assets.mus.io/c7f2b6686c0a2258f95a6b2cd5611e2c9de99def788f8f25f9e88718595993ce.png",
+  "https://assets.mus.io/a73f4e81f151008b4ac2d1f5d1b2b6f8c7c1c0cbc4c875c49388b7386f60fe91.png",
+  "https://assets.mus.io/54a7970f42264e090ba8d040f7572bf5451c71c8e40fd3e4cf1c17fbdab7b16d.png",
+  "https://assets.mus.io/91eb22dd09987567f022bd5d20ddeb30fe0acf6663710fac40ff5d6d4bf02b4d.png",
+  "https://assets.mus.io/ad93c98d63c5ed3248fce564d7e8eb56c0eec9650c362d45b336f283a53c4b65.png",
+  "https://assets.mus.io/54bd0cd6e5ef253d60f49a6546ba706bb6dea43b4985fd38d4288f781f28e33b.png",
+  "https://assets.mus.io/1dc3b4dacb81d6055069258ec6a269c83cad86b713b17791481df36eb62e6cd2.png",
+  "https://assets.mus.io/62597a20a1387ecff7b22d657ef6d6d8a81f560362cd8e5a120b4c7939215898029cc0b5f.png",
+  "https://assets.mus.io/4c03b5984c504c0de951b88f6db8ac942b628d544a088a9565f765a16686516f.png",
+  "https://assets.mus.io/2345cfa1d3d8f7387b475730f239e5e059672a03c3a25c891bf2ce5a10c97ac9.png",
+  "https://assets.mus.io/6becd3b14e87fe32b1252dd4df8d0895933fb5fac8ccf85af2efefbb7ea8e234.png",
+  "https://assets.mus.io/401360489d2c0824ea175a6a7b437e89ccf4f9882f9340b67ab5de2d7437ba1c.png",
+  "https://assets.mus.io/46981bd50917977d95f2be4d77285028eb8482fa20c0c8d3338d2b6e1e68ab58.png",
+  "https://assets.mus.io/aa5fec9a7b31f8006473cad73916e8597411d66a499c9a5bdab204ba32e6d606.png",
+  "https://assets.mus.io/349e1a30f73d4a0bd6d1026fac09540317e37b1d16d9c27619c80deccab708fd.png",
+  "https://assets.mus.io/281b213745fdf1376ee40cdca079608b3f7632b2f96000f85fdb48562aa0d359.png",
+  "https://assets.mus.io/77e85bfcc115a41211915c752b5e70d3e2f6069f6d28023613cdbd904a49b2b6.png",
+  "https://assets.mus.io/2e375ccc64217f564c2aae76e0e8b7806bd1d961525a7fe788722461a3908d3b.png",
+  "https://assets.mus.io/3cf3ba54401addbb480a1828c1521d31e2743d609c60ca259bf169720c5724c6.png",
+  "https://assets.mus.io/10f4575e0d896ce4bd71a9b951323bf90ea70a510677507a05e9ec619ad0bbb1.png",
+  "https://assets.mus.io/c1fb0fa35f77c7ed10612aefa366211a102a67f38eceb4a9acf760acdf98c07d.png",
+  "https://assets.mus.io/2a768ca57374bd2ae6197563a783811aac16e5a120b4c7939215898029cc0b5f.png",
+  "https://assets.mus.io/6105393e33c7821e0a98ed6d9521f6cf8449d2abcfadb4da75de7d620d98d30a.png",
+  "https://assets.mus.io/e238686257fe005be13cd2f6e2aa71dc1750142b4db2443dd588134a952cabb7.png",
+  "https://assets.mus.io/95e5fb6b6a9ae843c4092bc83d7fe5f70a66dd74125a67382af77fe205927f03.png",
+  "https://assets.mus.io/5e6678b1dfba3a7c56e67c311d19eda0e860a93eb909222cab2165c2afd3c9c5.png",
+  "https://assets.mus.io/08a549f6c4f7fe95d908bbe6d065f02e684589e652aa6c19df24be2040c275cb.png",
+  "https://assets.mus.io/48797ba221b09d58d38bf475f99cb7f6b0153c92b54e136e9546d91e4513088f.png",
+  "https://assets.mus.io/da52f37f37b01530ba11fc35abf4ccc8d57994340f572295c702b2ca60be5802.png",
+  "https://assets.mus.io/a1edecd3b1527a134a5fea666d68d7b0aed112fc56237a0278893a252ea6a71b.png",
+  "https://assets.mus.io/08ee708999aacf7bc421de18282a8f7ed745f0daf0c1f1790ce9126ffcbc0936.png",
+  "https://assets.mus.io/26972cac458fd6d676d5dcddd71582695cfa0dc446e3c3dc370f255393f7faa7.png",
+  "https://assets.mus.io/7e72ac36e2afa1bc33259eeed45aa496a7040079b0c7f510a4ec9d62ef3d38d0.png",
+  "https://assets.mus.io/bfb3deeb76562e7d1f621047229c4124b09b1173ca34184c5da07237d9ee7858.png",
+  "https://assets.mus.io/21191d2771156504d857619c9fafd70ca5191dc84760794d8cc99af986f79ff2.png",
+  "https://assets.mus.io/d187f69b30dc6a15e9c82d570746349545459939c64ad4096b98074ac50b43aa.png",
+  "https://assets.mus.io/399f9f85d04d5183767ebb7f4bafaceccda101dfd2321a9e7cea82b47adbf810.png",
+  "https://assets.mus.io/aa8b0bf742848152beb50e142c21112f3198d9c32c8fa08208cc1daf71c7a3d2.png",
+  "https://assets.mus.io/5da86ce2c01b9a255966f6f9b099b5ad2f7890f16f202ae8cf82a596726f6586.png",
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Instrument Grid - Screenshot Utility</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #0a0a0a;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(10, 200px);
+      gap: 8px;
+      padding: 8px;
+    }
+    .grid img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .grid img.broken {
+      background: #ff0000;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    {instrumentImages.map((src, i) => (
+      <img 
+        src={src} 
+        alt={`Instrument ${i + 1}`}
+        onerror="this.classList.add('broken')"
+      />
+    ))}
+  </div>
+</body>
+</html>
