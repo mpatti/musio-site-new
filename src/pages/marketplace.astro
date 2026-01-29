@@ -10,6 +10,7 @@ const user = { name: "Mike Patti" };
 // Infer category from product name
 function inferCategory(name: string): string {
   const lowerName = name.toLowerCase();
+  if (lowerName.includes('hardanger')) return 'World';
   if (lowerName.includes('string') || lowerName.includes('violin') || lowerName.includes('cello') || lowerName.includes('viola') || lowerName.includes('fiddle')) return 'Strings';
   if (lowerName.includes('brass') || lowerName.includes('horn') || lowerName.includes('trumpet') || lowerName.includes('trombone')) return 'Brass';
   if (lowerName.includes('percussion') || lowerName.includes('drum') || lowerName.includes('strike') || lowerName.includes('marimba') || lowerName.includes('mallet')) return 'Percussion';
