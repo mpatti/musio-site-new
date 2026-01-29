@@ -239,17 +239,42 @@ const categories = [
     </button>
   </div>
 
+  <!-- Paddle.js -->
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+  
   <script is:inline>
     document.addEventListener('DOMContentLoaded', function() {
+      // Initialize Paddle
+      if (typeof Paddle !== 'undefined') {
+        Paddle.Initialize({ 
+          token: 'live_bcd84670952c10adf233b703201'
+        });
+      }
+
       const searchInput = document.getElementById('search-input');
       const productCards = document.querySelectorAll('.product-card');
       const categoryBtns = document.querySelectorAll('.category-btn');
       const developerBtns = document.querySelectorAll('.developer-btn');
       const productCount = document.getElementById('product-count');
+      const addToCartBtns = document.querySelectorAll('.add-to-cart');
       
       let currentCategory = 'All';
       let currentDeveloper = 'All';
       let searchQuery = '';
+
+      // Add to Cart / Checkout handler
+      addToCartBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const priceId = this.dataset.priceId;
+          if (priceId && typeof Paddle !== 'undefined') {
+            Paddle.Checkout.open({
+              items: [{ priceId: priceId, quantity: 1 }]
+            });
+          } else {
+            console.error('Paddle not loaded or price ID missing');
+          }
+        });
+      });
 
       function filterProducts() {
         let visibleCount = 0;
