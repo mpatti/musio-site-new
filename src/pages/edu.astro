@@ -278,48 +278,52 @@ import Layout from '../layouts/Layout.astro';
   </footer>
 </Layout>
 
-<script>
-  const modal = document.getElementById('edu-modal');
-  const modalTitle = document.getElementById('modal-title');
-  const selectedPlan = document.getElementById('selected-plan');
-  const eduForm = document.getElementById('edu-form');
-  const eduSuccess = document.getElementById('edu-success');
-  
-  window.openEduForm = function(plan) {
-    selectedPlan.value = plan;
-    modalTitle.textContent = plan === 'pro' ? 'Verify EDU Status — Musio Pro' : 'Verify EDU Status — Musio';
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    document.body.style.overflow = 'hidden';
-  };
-  
-  window.closeEduForm = function() {
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
-    document.body.style.overflow = '';
-    // Reset form
-    eduForm.classList.remove('hidden');
-    eduSuccess.classList.add('hidden');
-    eduForm.reset();
-  };
-  
-  // Close on backdrop click
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeEduForm();
-  });
-  
-  // Close on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeEduForm();
-  });
-  
-  // Form submission
-  eduForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('edu-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const selectedPlan = document.getElementById('selected-plan');
+    const eduForm = document.getElementById('edu-form');
+    const eduSuccess = document.getElementById('edu-success');
     
-    // In production, you'd send this to your backend
-    // For now, just show success state
-    eduForm.classList.add('hidden');
-    eduSuccess.classList.remove('hidden');
+    window.openEduForm = function(plan) {
+      selectedPlan.value = plan;
+      modalTitle.textContent = plan === 'pro' ? 'Verify EDU Status — Musio Pro' : 'Verify EDU Status — Musio';
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    };
+    
+    window.closeEduForm = function() {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+      // Reset form
+      eduForm.classList.remove('hidden');
+      eduSuccess.classList.add('hidden');
+      eduForm.reset();
+    };
+    
+    // Close on backdrop click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) window.closeEduForm();
+    });
+    
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        window.closeEduForm();
+      }
+    });
+    
+    // Form submission
+    eduForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      // In production, you'd send this to your backend
+      // For now, just show success state
+      eduForm.classList.add('hidden');
+      eduSuccess.classList.remove('hidden');
+    });
   });
 </script>
