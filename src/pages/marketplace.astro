@@ -7,12 +7,54 @@ const products = await getMarketplaceProducts();
 
 const user = { name: "Mike Patti" };
 
+// Infer category from product name
+function inferCategory(name: string): string {
+  const lowerName = name.toLowerCase();
+  if (lowerName.includes('string') || lowerName.includes('violin') || lowerName.includes('cello') || lowerName.includes('viola') || lowerName.includes('fiddle')) return 'Strings';
+  if (lowerName.includes('brass') || lowerName.includes('horn') || lowerName.includes('trumpet') || lowerName.includes('trombone')) return 'Brass';
+  if (lowerName.includes('percussion') || lowerName.includes('drum') || lowerName.includes('strike') || lowerName.includes('marimba') || lowerName.includes('mallet')) return 'Percussion';
+  if (lowerName.includes('woodwind') || lowerName.includes('flute') || lowerName.includes('clarinet') || lowerName.includes('oboe') || lowerName.includes('bassoon')) return 'Woodwinds';
+  if (lowerName.includes('guitar') || lowerName.includes('banjo') || lowerName.includes('ukulele')) return 'Guitars';
+  if (lowerName.includes('piano') || lowerName.includes('keyboard') || lowerName.includes('organ') || lowerName.includes('celeste') || lowerName.includes('harpsichord') || lowerName.includes('rhodes') || lowerName.includes('wurly')) return 'Keyboards';
+  if (lowerName.includes('synth') || lowerName.includes('vision')) return 'Synthesizers';
+  if (lowerName.includes('choir') || lowerName.includes('voice') || lowerName.includes('vocal') || lowerName.includes('voces')) return 'Choir';
+  if (lowerName.includes('world') || lowerName.includes('african') || lowerName.includes('nordic') || lowerName.includes('village') || lowerName.includes('kalimba') || lowerName.includes('dulcimer') || lowerName.includes('zither') || lowerName.includes('harp') && !lowerName.includes('harpsichord')) return 'World';
+  if (lowerName.includes('sound') || lowerName.includes('collision') || lowerName.includes('scape') || lowerName.includes('sketchpad') || lowerName.includes('color')) return 'Sound Design';
+  return 'Other';
+}
+
+// Infer developer from product name
+function inferDeveloper(name: string): string {
+  const lowerName = name.toLowerCase();
+  if (lowerName.startsWith('cine') || lowerName.includes('cinepiano') || lowerName.includes('cineharps') || lowerName.includes('cinelegacy') || lowerName.includes('cineperc') || lowerName.includes('cinewind') || lowerName.includes('cinebrass') || lowerName.includes('cinestring')) return 'Cinesamples';
+  if (lowerName.includes('hyperion') || lowerName.includes('emotional piano') || lowerName.includes('apocalypse')) return 'Soundiron';
+  if (lowerName.includes('scoring synth') || lowerName.includes('scoring string') || lowerName.includes('nashville') || lowerName.includes('studio guitar') || lowerName.includes('studio bass')) return 'AudioOllie';
+  if (lowerName.includes('true strike')) return 'ProjectSAM';
+  if (lowerName.includes('tina guo')) return 'Tina Guo';
+  if (lowerName.includes('taylor davis')) return 'Taylor Davis';
+  if (lowerName.includes('randy kerber')) return 'Randy Kerber';
+  if (lowerName.includes('gina luciani')) return 'Gina Luciani';
+  if (lowerName.includes('voces8') || lowerName.includes('voces 8')) return 'Voces8';
+  if (lowerName.includes('drums of war')) return 'Cinesamples';
+  if (lowerName.includes('hollywoodwinds')) return 'Cinesamples';
+  if (lowerName.includes('industry')) return 'Impact Soundworks';
+  return 'Other';
+}
+
+// Add category and developer to products
+const enrichedProducts = products.map(p => ({
+  ...p,
+  category: inferCategory(p.name),
+  developer: inferDeveloper(p.name)
+}));
+
+// Get unique developers from actual data
+const allDevelopers = [...new Set(enrichedProducts.map(p => p.developer))].filter(d => d !== 'Other').sort();
+
 const categories = [
   "All", "Strings", "Brass", "Percussion", "Woodwinds", "Guitars", 
   "Keyboards", "Synthesizers", "Choir", "World", "Sound Design"
 ];
-
-const developers = ["Cinesamples", "Soundiron", "AudioOllie", "ProjectSAM"];
 ---
 
 <Layout title="Marketplace - Musio" description="Browse and purchase virtual instruments.">
@@ -85,9 +127,12 @@ const developers = ["Cinesamples", "Soundiron", "AudioOllie", "ProjectSAM"];
         <!-- Categories -->
         <div class="mb-8">
           <h3 class="text-white font-semibold mb-4">Categories</h3>
-          <nav class="space-y-1">
+          <nav id="category-filters" class="space-y-1">
             {categories.map((cat, i) => (
-              <button class={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${i === 2 ? 'bg-[#E94560] text-white' : 'bg-[#1a1a1a] text-gray-300 hover:bg-[#2a2a2a]'}`}>
+              <button 
+                class={`category-btn w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${i === 0 ? 'bg-[#E94560] text-white active' : 'bg-[#1a1a1a] text-gray-300 hover:bg-[#2a2a2a]'}`}
+                data-category={cat}
+              >
                 {cat}
               </button>
             ))}
@@ -97,9 +142,18 @@ const developers = ["Cinesamples", "Soundiron", "AudioOllie", "ProjectSAM"];
         <!-- Developers -->
         <div>
           <h3 class="text-white font-semibold mb-4">Developer</h3>
-          <nav class="space-y-1">
-            {developers.map((dev) => (
-              <button class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors bg-[#1a1a1a] text-gray-300 hover:bg-[#2a2a2a]">
+          <nav id="developer-filters" class="space-y-1">
+            <button 
+              class="developer-btn w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors bg-[#E94560] text-white active"
+              data-developer="All"
+            >
+              All
+            </button>
+            {allDevelopers.map((dev) => (
+              <button 
+                class="developer-btn w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors bg-[#1a1a1a] text-gray-300 hover:bg-[#2a2a2a]"
+                data-developer={dev}
+              >
                 {dev}
               </button>
             ))}
@@ -114,7 +168,8 @@ const developers = ["Cinesamples", "Soundiron", "AudioOllie", "ProjectSAM"];
           <div class="relative">
             <input 
               type="text" 
-              placeholder="Search"
+              id="search-input"
+              placeholder="Search instruments..."
               class="w-full px-4 py-3 bg-[#141414] border border-[#2a2a2a] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#E94560] transition-colors pr-12"
             />
             <svg class="w-5 h-5 text-gray-500 absolute right-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -124,9 +179,16 @@ const developers = ["Cinesamples", "Soundiron", "AudioOllie", "ProjectSAM"];
         </div>
 
         <!-- Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {products.map((product) => (
-            <div class="bg-[#141414] rounded-xl border border-[#1a1a1a] overflow-hidden hover:border-[#2a2a2a] transition-colors group" data-product-id={product.id} data-price-id={product.priceId}>
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {enrichedProducts.map((product) => (
+            <div 
+              class="product-card bg-[#141414] rounded-xl border border-[#1a1a1a] overflow-hidden hover:border-[#2a2a2a] transition-colors group" 
+              data-product-id={product.id} 
+              data-price-id={product.priceId}
+              data-name={product.name.toLowerCase()}
+              data-category={product.category}
+              data-developer={product.developer}
+            >
               <div class="aspect-square overflow-hidden">
                 <img 
                   src={product.image} 
@@ -137,7 +199,7 @@ const developers = ["Cinesamples", "Soundiron", "AudioOllie", "ProjectSAM"];
               </div>
               <div class="p-4">
                 <h4 class="text-white font-semibold mb-1 truncate" title={product.name}>{product.name}</h4>
-                <p class="text-gray-400 text-sm mb-3 truncate">{product.description || 'Virtual Instrument'}</p>
+                <p class="text-gray-400 text-sm mb-3 truncate">{product.description || product.developer}</p>
                 <div class="flex items-center justify-between">
                   <span class="text-white font-bold">${product.price.toFixed(2)}</span>
                   <button 
@@ -156,7 +218,7 @@ const developers = ["Cinesamples", "Soundiron", "AudioOllie", "ProjectSAM"];
         </div>
         
         <!-- Product count -->
-        <p class="text-gray-500 text-sm mt-6">{products.length} products available</p>
+        <p id="product-count" class="text-gray-500 text-sm mt-6">{enrichedProducts.length} products available</p>
       </main>
     </div>
   </div>
@@ -170,4 +232,75 @@ const developers = ["Cinesamples", "Soundiron", "AudioOllie", "ProjectSAM"];
       Support
     </button>
   </div>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('search-input');
+      const productCards = document.querySelectorAll('.product-card');
+      const categoryBtns = document.querySelectorAll('.category-btn');
+      const developerBtns = document.querySelectorAll('.developer-btn');
+      const productCount = document.getElementById('product-count');
+      
+      let currentCategory = 'All';
+      let currentDeveloper = 'All';
+      let searchQuery = '';
+
+      function filterProducts() {
+        let visibleCount = 0;
+        
+        productCards.forEach(card => {
+          const name = card.dataset.name;
+          const category = card.dataset.category;
+          const developer = card.dataset.developer;
+          
+          const matchesSearch = searchQuery === '' || name.includes(searchQuery.toLowerCase());
+          const matchesCategory = currentCategory === 'All' || category === currentCategory;
+          const matchesDeveloper = currentDeveloper === 'All' || developer === currentDeveloper;
+          
+          if (matchesSearch && matchesCategory && matchesDeveloper) {
+            card.style.display = '';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        
+        productCount.textContent = visibleCount + ' product' + (visibleCount !== 1 ? 's' : '') + ' available';
+      }
+
+      // Search handler
+      searchInput.addEventListener('input', function(e) {
+        searchQuery = e.target.value;
+        filterProducts();
+      });
+
+      // Category filter handler
+      categoryBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          categoryBtns.forEach(b => {
+            b.classList.remove('bg-[#E94560]', 'text-white', 'active');
+            b.classList.add('bg-[#1a1a1a]', 'text-gray-300');
+          });
+          this.classList.remove('bg-[#1a1a1a]', 'text-gray-300');
+          this.classList.add('bg-[#E94560]', 'text-white', 'active');
+          currentCategory = this.dataset.category;
+          filterProducts();
+        });
+      });
+
+      // Developer filter handler
+      developerBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          developerBtns.forEach(b => {
+            b.classList.remove('bg-[#E94560]', 'text-white', 'active');
+            b.classList.add('bg-[#1a1a1a]', 'text-gray-300');
+          });
+          this.classList.remove('bg-[#1a1a1a]', 'text-gray-300');
+          this.classList.add('bg-[#E94560]', 'text-white', 'active');
+          currentDeveloper = this.dataset.developer;
+          filterProducts();
+        });
+      });
+    });
+  </script>
 </Layout>
