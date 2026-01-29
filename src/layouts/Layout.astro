@@ -44,5 +44,19 @@ const {
   </head>
   <body class="bg-[#0a0a0a] text-white font-sans antialiased">
     <slot />
+    
+    <!-- Paddle Checkout -->
+    <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+    <script>
+      Paddle.Initialize({
+        token: 'live_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' // Replace with your Paddle client-side token
+      });
+      
+      window.openMusioPro = function() {
+        Paddle.Checkout.open({
+          items: [{ priceId: 'pro_01kg4wxdja381kvpbvxmr6mxx0', quantity: 1 }]
+        });
+      };
+    </script>
   </body>
 </html>
