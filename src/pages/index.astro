@@ -640,6 +640,7 @@ Get Musio Pro
           <a href="/developers" class="hover:text-white transition-colors">Developers</a>
           <a href="https://musio.com/privacy" class="hover:text-white transition-colors">Privacy</a>
           <a href="https://support.musio.com/hc/en-us/sections/4418778675479-Legal" class="hover:text-white transition-colors">Legal</a>
+          <button onclick="openAbout()" class="hover:text-white transition-colors cursor-pointer">About</button>
         </nav>
         
         <!-- Social Links -->
@@ -828,6 +829,29 @@ Get Musio Pro
   </div>
 </div>
 
+<!-- About Modal -->
+<div id="about-modal" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4">
+  <div class="relative w-full max-w-xl bg-[#141414] rounded-2xl p-8 md:p-12">
+    <button onclick="closeAbout()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl leading-none">&times;</button>
+    
+    <h2 class="text-2xl md:text-3xl font-bold mb-6">About Musio</h2>
+    
+    <div class="space-y-4 text-gray-300 leading-relaxed">
+      <p>
+        Musio was founded by <strong class="text-white">Mike Patti</strong>, a classically trained pianist, orchestrator, and composer who has been working professionally in the music industry since 2002.
+      </p>
+      <p>
+        In 2007, Mike founded <strong class="text-white">Cinesamples</strong>, which grew into one of the most respected names in virtual instruments. After nearly two decades in the industry, he started Musio with a simple goal: create a sustainable home for world-class instruments that puts musicians first.
+      </p>
+      <p>
+        Mike believes that real music, made by real humans, will always matter—and Musio is built to support that for the long haul.
+      </p>
+    </div>
+    
+    <p class="text-[#E94560] font-semibold mt-8">Independently owned. Built to last.</p>
+  </div>
+</div>
+
 <script>
   // Lightbox functionality
   const lightbox = document.getElementById('lightbox');
@@ -856,6 +880,7 @@ Get Musio Pro
     if (e.key === 'Escape') {
       closeLightbox();
       closeCatalog();
+      closeAbout();
     }
   });
   
@@ -880,6 +905,26 @@ Get Musio Pro
   // Close catalog on backdrop click
   catalogModal.addEventListener('click', (e) => {
     if (e.target === catalogModal) closeCatalog();
+  });
+  
+  // About modal
+  const aboutModal = document.getElementById('about-modal');
+  
+  window.openAbout = function() {
+    aboutModal.classList.remove('hidden');
+    aboutModal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  };
+  
+  window.closeAbout = function() {
+    aboutModal.classList.add('hidden');
+    aboutModal.classList.remove('flex');
+    document.body.style.overflow = '';
+  };
+  
+  // Close about on backdrop click
+  aboutModal.addEventListener('click', (e) => {
+    if (e.target === aboutModal) closeAbout();
   });
   
   // Cycling word animation
