@@ -493,15 +493,15 @@ const developers = [
             
             <!-- Billing Toggle -->
             <div class="flex bg-[#0a0a0a] rounded-lg p-1 mb-4">
-              <button class="pro-toggle flex-1 py-2 px-3 text-sm font-medium rounded-md transition-colors text-gray-400" data-plan="pro" data-period="monthly">Monthly</button>
-              <button class="pro-toggle flex-1 py-2 px-3 text-sm font-medium rounded-md transition-colors bg-[#E94560] text-white" data-plan="pro" data-period="annual">Annual</button>
+              <button class="pro-toggle flex-1 py-2 px-3 text-sm font-medium rounded-md transition-colors bg-[#E94560] text-white" data-plan="pro" data-period="monthly">Monthly</button>
+              <button class="pro-toggle flex-1 py-2 px-3 text-sm font-medium rounded-md transition-colors text-gray-400" data-plan="pro" data-period="annual">Annual</button>
             </div>
             
             <div class="flex items-baseline gap-2">
-              <span id="pro-price" class="text-4xl font-bold">$149</span>
-              <span id="pro-period" class="text-gray-300">/year</span>
+              <span id="pro-price" class="text-4xl font-bold">$19</span>
+              <span id="pro-period" class="text-gray-300">/month</span>
             </div>
-            <p id="pro-savings" class="text-[#E94560] text-sm mt-1 h-5">Launch price — save 35%</p>
+            <p id="pro-savings" class="text-[#E94560] text-sm mt-1 h-5"></p>
           </div>
           
           <ul class="space-y-4 mb-8 flex-grow">
@@ -952,7 +952,7 @@ Get Musio Pro
   
   // Pricing toggle functionality
   let musioPeriod = 'monthly';
-  let proPeriod = 'annual';
+  let proPeriod = 'monthly';
   
   // Musio toggle
   document.querySelectorAll('.musio-toggle').forEach(btn => {
