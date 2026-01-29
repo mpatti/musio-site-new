@@ -123,23 +123,13 @@ const developers = [
 
   <!-- Hero Section -->
   <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-    <!-- Netflix-style Image Grid Background -->
+    <!-- Single Image Background with 3D Transform -->
     <div class="absolute inset-0 grid-background">
-      <div class="image-grid">
-        {instrumentImages.map((src, i) => (
-          <div class="grid-item">
-            <img 
-              src={src} 
-              alt="" 
-              loading={i < 22 ? "eager" : "lazy"}
-              decoding="async"
-              width="100"
-              height="100"
-              class="w-full h-full object-cover" 
-            />
-          </div>
-        ))}
-      </div>
+      <img 
+        src="/hero-bg.png" 
+        alt="" 
+        class="hero-bg-image"
+      />
     </div>
     
     <!-- Gradient Overlay -->
@@ -689,40 +679,19 @@ Get Musio Pro
     overflow: hidden;
   }
   
-  .image-grid {
-    display: grid;
-    grid-template-columns: repeat(11, 100px);
-    grid-auto-rows: 100px;
-    gap: 0;
+  .hero-bg-image {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -60%) perspective(800px) rotateX(30deg) scale(2.2);
-  }
-  
-  .grid-item {
-    overflow: hidden;
-    opacity: 1;
+    transform: translate(-50%, -60%) perspective(800px) rotateX(30deg) scale(1.8);
     filter: blur(1.5px) brightness(1.2);
-    width: 100%;
-    height: 100%;
-    background: #1a1a1a;
+    width: auto;
+    max-width: none;
   }
-  
-  .grid-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
+
   @media (max-width: 768px) {
-    .image-grid {
-      grid-template-columns: repeat(9, 80px);
-      grid-auto-rows: 80px;
-      gap: 0;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) perspective(800px) rotateX(25deg) scale(2.5);
+    .hero-bg-image {
+      transform: translate(-50%, -50%) perspective(800px) rotateX(25deg) scale(2.2);
     }
   }
   
