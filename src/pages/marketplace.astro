@@ -26,19 +26,29 @@ function inferCategory(name: string): string {
 // Infer developer from product name
 function inferDeveloper(name: string): string {
   const lowerName = name.toLowerCase();
-  if (lowerName.startsWith('cine') || lowerName.includes('cinepiano') || lowerName.includes('cineharps') || lowerName.includes('cinelegacy') || lowerName.includes('cineperc') || lowerName.includes('cinewind') || lowerName.includes('cinebrass') || lowerName.includes('cinestring')) return 'Cinesamples';
-  if (lowerName.includes('hyperion') || lowerName.includes('emotional piano') || lowerName.includes('apocalypse')) return 'Soundiron';
-  if (lowerName.includes('scoring synth') || lowerName.includes('scoring string') || lowerName.includes('nashville') || lowerName.includes('studio guitar') || lowerName.includes('studio bass')) return 'AudioOllie';
-  if (lowerName.includes('true strike')) return 'ProjectSAM';
-  if (lowerName.includes('tina guo')) return 'Tina Guo';
-  if (lowerName.includes('taylor davis')) return 'Taylor Davis';
-  if (lowerName.includes('randy kerber')) return 'Randy Kerber';
-  if (lowerName.includes('gina luciani')) return 'Gina Luciani';
-  if (lowerName.includes('voces8') || lowerName.includes('voces 8')) return 'Voces8';
-  if (lowerName.includes('drums of war')) return 'Cinesamples';
-  if (lowerName.includes('hollywoodwinds')) return 'Cinesamples';
-  if (lowerName.includes('industry')) return 'Impact Soundworks';
-  return 'Other';
+  
+  // Cinesamples products
+  if (lowerName.startsWith('cine') || lowerName.includes('drums of war') || lowerName.includes('hollywoodwinds') || 
+      lowerName.includes('tina guo') || lowerName.includes('taylor davis') || lowerName.includes('randy kerber') || 
+      lowerName.includes('gina luciani') || lowerName.includes('voces8') || lowerName.includes('voces 8') ||
+      lowerName.includes('artist series')) return 'Cinesamples';
+  
+  // Soundiron products
+  if (lowerName.includes('hyperion') || lowerName.includes('emotional piano') || lowerName.includes('apocalypse') ||
+      lowerName.includes('soundscape') || lowerName.includes('voice') || lowerName.includes('choir') ||
+      lowerName.includes('olympus') || lowerName.includes('iron pack')) return 'Soundiron';
+  
+  // AudioOllie products
+  if (lowerName.includes('scoring synth') || lowerName.includes('scoring string') || lowerName.includes('nashville') || 
+      lowerName.includes('studio guitar') || lowerName.includes('studio bass') || lowerName.includes('la modern') ||
+      lowerName.includes('collision') || lowerName.includes('industry')) return 'AudioOllie';
+  
+  // ProjectSAM products
+  if (lowerName.includes('true strike') || lowerName.includes('orchestral') || lowerName.includes('swing') ||
+      lowerName.includes('lumina')) return 'ProjectSAM';
+  
+  // Default to Cinesamples for unmatched (most products are Cinesamples)
+  return 'Cinesamples';
 }
 
 // Add category and developer to products
@@ -48,8 +58,8 @@ const enrichedProducts = products.map(p => ({
   developer: inferDeveloper(p.name)
 }));
 
-// Get unique developers from actual data
-const allDevelopers = [...new Set(enrichedProducts.map(p => p.developer))].filter(d => d !== 'Other').sort();
+// Fixed list of developers
+const allDevelopers = ['AudioOllie', 'Cinesamples', 'ProjectSAM', 'Soundiron'];
 
 const categories = [
   "All", "Strings", "Brass", "Percussion", "Woodwinds", "Guitars", 
