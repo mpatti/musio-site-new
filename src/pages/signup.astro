@@ -46,12 +46,30 @@ const instrumentImages = [
       
       <!-- Branding on left side -->
       <div class="absolute bottom-12 left-12 z-10">
-        <img src="/logo.png" alt="Musio" class="h-10" />
+        <a href="/">
+          <img src="/logo.png" alt="Musio" class="h-10" />
+        </a>
       </div>
+      
+      <!-- Back link -->
+      <a href="/" class="absolute top-8 left-8 z-10 text-gray-400 hover:text-white text-sm transition-colors flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Back to Musio
+      </a>
     </div>
 
     <!-- Right Side - Form -->
-    <div class="w-full lg:w-1/2 flex items-center justify-center px-6 py-12">
+    <div class="w-full lg:w-1/2 flex items-center justify-center px-6 py-12 relative">
+      <!-- Back link (mobile) -->
+      <a href="/" class="absolute top-6 left-6 lg:hidden text-gray-400 hover:text-white text-sm transition-colors flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Back
+      </a>
+      
       <div class="w-full max-w-md">
         <!-- Logo (mobile only) -->
         <div class="text-center mb-10 lg:hidden">
